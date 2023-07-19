@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cluster_v3/regenmode.dart';
+import 'package:flutter_homescreen/regenmode.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class powermode extends StatefulWidget{
