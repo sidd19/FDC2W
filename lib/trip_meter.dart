@@ -18,14 +18,14 @@ class _trip_meter  extends State<trip_meter >{
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar:AppBar(
-
-        backgroundColor:Color(0Xff7FFFD4),
-
-        title: Text(""),
-
-
-      ),
+      // appBar:AppBar(
+      //
+      //   backgroundColor:Color(0Xff7FFFD4),
+      //
+      //   title: Text(""),
+      //
+      //
+      // ),
 
       body:Center(
           child:Container(

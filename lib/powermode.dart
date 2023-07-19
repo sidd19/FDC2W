@@ -20,14 +20,14 @@ class _powermode extends State<powermode>{
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar:AppBar(
-
-        backgroundColor:Color(0Xffffdbac),
-
-        title: Text("Power Mode"),
-
-
-      ),
+      // appBar:AppBar(
+      //
+      //   backgroundColor:Color(0Xffffdbac),
+      //
+      //   title: Text("Power Mode"),
+      //
+      //
+      // ),
 
       body:Center(
           child: Container(

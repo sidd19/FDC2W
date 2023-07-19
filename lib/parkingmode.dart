@@ -18,14 +18,14 @@ class _parkingmode extends State<parkingmode>{
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar:AppBar(
-
-        backgroundColor:Color(0Xff7FFFD4),
-
-        title: Text("Parking Mode"),
-
-
-      ),
+      // appBar:AppBar(
+      //
+      //   backgroundColor:Color(0Xff7FFFD4),
+      //
+      //   title: Text("Parking Mode"),
+      //
+      //
+      // ),
 
       body:Center(
           child:Container(

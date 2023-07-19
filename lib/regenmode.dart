@@ -20,14 +20,14 @@ class _regenmode extends State<regenmode>{
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar:AppBar(
-
-        backgroundColor:Color(0XffDFE9F5),
-
-        title: Text("REGEN Mode"),
-
-
-      ),
+      // appBar:AppBar(
+      //
+      //   backgroundColor:Color(0XffDFE9F5),
+      //
+      //   title: Text("REGEN Mode"),
+      //
+      //
+      // ),
 
       body:Center(
           child: Container(

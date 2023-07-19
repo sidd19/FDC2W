@@ -21,14 +21,14 @@ class _menubar  extends State<menubar >{
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar:AppBar(
-
-        backgroundColor:Color(0xff808080),
-
-        title: Text(""),
-
-
-      ),
+      // appBar:AppBar(
+      //
+      //   backgroundColor:Color(0xff808080),
+      //
+      //   title: Text(""),
+      //
+      //
+      // ),
 
       body:Center(
           child:Container(

@@ -228,12 +228,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-        backgroundColor:Color(0xffFFBF00),
-
-        title: Text("TVS Star City Demo"),
-      ),
+      // appBar: AppBar(
+      //
+      //   backgroundColor:Color(0xffFFBF00),
+      //
+      //   title: Text("TVS Star City Demo"),
+      // ),
       body: Center(
           child: Container(
                  height:600,
