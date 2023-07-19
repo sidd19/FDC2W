@@ -3,18 +3,18 @@
 //importing all the required package
 
 import 'dart:io';
-import 'package:cluster_v3/regenmode.dart';
+import 'package:flutter_homescreen/regenmode.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 //import 'package:percent_indicator/percent_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cluster_v3/powermode.dart';
-import 'package:cluster_v3/parkingmode.dart';
-import 'package:cluster_v3/menubar.dart';
-import 'package:cluster_v3/general_settings.dart';
-import 'package:cluster_v3/sound.dart';
-import 'package:cluster_v3/my_vehicle.dart';
-import 'package:cluster_v3/trip_meter.dart';
+import 'package:flutter_homescreen/powermode.dart';
+import 'package:flutter_homescreen/parkingmode.dart';
+import 'package:flutter_homescreen/menubar.dart';
+import 'package:flutter_homescreen/general_settings.dart';
+import 'package:flutter_homescreen/sound.dart';
+import 'package:flutter_homescreen/my_vehicle.dart';
+import 'package:flutter_homescreen/trip_meter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //package import done
