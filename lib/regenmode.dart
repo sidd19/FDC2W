@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_homescreen/menubar.dart';
+import 'package:FDC2W/menubar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class regenmode extends StatefulWidget{
