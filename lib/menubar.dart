@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:FDC2W/general_settings.dart';
-import 'package:FDC2W/regenmode.dart';
-import 'package:FDC2W/parkingmode.dart';
+import 'package:flutter_homescreen/general_settings.dart';
+import 'package:flutter_homescreen/regenmode.dart';
+import 'package:flutter_homescreen/parkingmode.dart';
 
 class menubar extends StatefulWidget{
 
