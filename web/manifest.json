@@ -1,6 +1,6 @@
 {
-    "name": "cluster_v3",
-    "short_name": "cluster_v3",
+    "name": "cluster_copy",
+    "short_name": "cluster_copy",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

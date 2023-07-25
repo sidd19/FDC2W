@@ -1,6 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application
-        android:label="cluster_v3"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.cluster_copy">
+   <application
+        android:label="cluster_copy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -5,6 +5,9 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_homescreen/menubar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_homescreen/powermode.dart';
+import 'main.dart';
+import 'package:intl/intl.dart';
 
 class regenmode extends StatefulWidget{
 
@@ -16,7 +19,37 @@ class regenmode extends StatefulWidget{
 
 }
 class _regenmode extends State<regenmode>{
+
+
+  String _currentTime = '';
+
   @override
+
+  void _updateTime() {
+    setState(() {
+      // Get the current time and format it as HH:mm:ss
+      _currentTime = DateFormat('HH:mm:ss').format(DateTime.now());
+    });
+
+    // Schedule the next update after one second (1000 milliseconds)
+    Future.delayed(Duration(seconds: 1), _updateTime);
+  }
+
+
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    _updateTime();
+
+
+
+
+  }
+
+
   Widget build(BuildContext context) {
     return Scaffold(
 
@@ -57,25 +90,114 @@ class _regenmode extends State<regenmode>{
                 children: [
 
 
-                  SizedBox(
-                    height:50,
-                    width:1200,
+                  Container(
+                    height:60,
+                    width:900,
+                    alignment:Alignment.center,
+
+                    decoration:BoxDecoration(
+                        color:Colors.white,
+                        borderRadius:BorderRadius.only(bottomLeft:Radius.elliptical(400, 400),bottomRight:Radius.elliptical(400, 400)),
+
+                        border:Border.all(
+                          color:Colors.black26,//Color(0xff38eeff),
+                          width:3,
 
 
-                  ),
+
+                        ),
+                        boxShadow:[
+                          BoxShadow(
+                            blurRadius:0,
+                            spreadRadius:0,
+                            color:Colors.black26,//Color(0xff38eeff),
+                          )
+                        ]
+
+                    ),
+
+
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom:0.0),
+                      child: Text(
+                        _currentTime,
+                        style: TextStyle(fontSize: 40,color:Colors.black),
+
+
+                      ),
+                    ),),
                   SizedBox(height:10),
                   SizedBox(
-                    height: 100,
+                    height: 120,
                     width: 800,
                     child:Row(
                       mainAxisAlignment:MainAxisAlignment.spaceAround,
                       children: [
 
-                        Icon(Icons.call,size:40,color:Color(0xff323232)),
-                        Icon(Icons.message,size:40,color:Color(0xff323232)),
-                        Icon(Icons.bluetooth,size:40,color:Color(0xff323232)),
-                        Icon(Icons.network_cell,size:40,color:Color(0xff323232)),
-                        Icon(Icons.battery_4_bar_rounded,size:40,color:Color(0xff323232))
+
+                        Padding(
+                          padding: const EdgeInsets.only(top:20),
+                          child: Container(
+                              height:40,
+                              width:40,
+                            child:left==true?Image.asset('assets/images/colorleftbg.png',fit:BoxFit.fill,):Image.asset('assets/images/left.png',fit:BoxFit.fill,),
+
+                          ),
+                        ),
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(left:50.0,top:10),
+                          child: Container(
+                              height:40,
+                              width:40,
+                            child:highbeam==true?Image.asset('assets/images/colorhighbeambg.png',fit:BoxFit.fill,):Image.asset('assets/images/high-beam.png',fit:BoxFit.fill,),
+                          ),
+                        ),
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(left:50.0,top:10),
+                          child: Container(
+                              height:40,
+                              width:40,
+                            child:hazard==true?Image.asset('assets/images/colorhazardbg.png',fit:BoxFit.fill,):Image.asset('assets/images/hazard.png',fit:BoxFit.fill,),
+                          ),
+                        ),
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(left:50,top:10),
+                          child: Container(
+                              height:40,
+                              width:40,
+                            child:malfunction==true?Image.asset('assets/images/colormalfunctionbg.png',fit:BoxFit.fill,):Image.asset('assets/images/malfunction.png',fit:BoxFit.fill,),
+                          ),
+                        ),
+
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(left:50,top:10),
+                          child: Container(
+                              height:40,
+                              width:40,
+                            child:side_stand==true?Image.asset('assets/images/colorside_standbg.png',fit:BoxFit.fill,):Image.asset('assets/images/side_stand.png',fit:BoxFit.fill,),
+                          ),
+                        ),
+
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(left:50,top:10),
+                          child: Container(
+                              height:40,
+                              width:40,
+                            child:right==true?Image.asset('assets/images/colorrightbg.png',fit:BoxFit.fill,):Image.asset('assets/images/right.png',fit:BoxFit.fill,),
+
+                          ),
+                        ),
+
 
 
                       ],
@@ -84,9 +206,23 @@ class _regenmode extends State<regenmode>{
                     ),
                   ),
                   Row(
+                    mainAxisAlignment:MainAxisAlignment.spaceAround,
+
                     children: [
+
+
+
+
+
+
+
+                      IconButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder:(context)=>powermode()));
+                      }, icon: Icon(Icons.keyboard_double_arrow_left,size:100,color:Colors.white,),)
+
+                      ,
                       Padding(
-                        padding: const EdgeInsets.only(left:140.0,top:0.0),
+                        padding: const EdgeInsets.only(left:0.0,top:0.0),
                         child: Center(
                           child: Container(
                             height:300,
@@ -119,7 +255,7 @@ class _regenmode extends State<regenmode>{
                               mainAxisAlignment:MainAxisAlignment.start,
                               children: [
                                 SfRadialGauge(
-                                  enableLoadingAnimation: true, animationDuration: 4500,
+                                  enableLoadingAnimation: false, animationDuration: 4500,
                                   //
                                   axes: <RadialAxis>[RadialAxis(
                                       minimum:0,maximum:120,isInversed:false,
@@ -135,7 +271,7 @@ class _regenmode extends State<regenmode>{
 
                                       axisLineStyle: AxisLineStyle(thickness: 30),
 
-                                      pointers: <GaugePointer>[NeedlePointer(value: 120, enableAnimation: true,
+                                      pointers: <GaugePointer>[NeedlePointer(value: 120, enableAnimation: false,
                                         needleStartWidth: 0,
 
                                         needleEndWidth: 0, needleColor: Color(0xFFDADADA),
@@ -148,7 +284,7 @@ class _regenmode extends State<regenmode>{
                                         animationType:AnimationType.ease,
 
                                       ),
-                                        RangePointer(value: 120, width: 30, enableAnimation: false, color: Color(0xff00ff00	))                     //0xff0FFF50 for eco mode
+                                        RangePointer(value:value, width:30, enableAnimation: false, color:get_guage_color() )                     //0xff0FFF50 for eco mode
                                       ],
 
 
@@ -168,7 +304,7 @@ class _regenmode extends State<regenmode>{
 
                                         ,
 
-                                        GaugeAnnotation(widget:Text("100",style:TextStyle(fontSize:60,fontWeight:FontWeight.bold,color:Color(0xffFF7417)),),
+                                        GaugeAnnotation(widget:Text("$value",style:TextStyle(fontSize:60,fontWeight:FontWeight.bold,color:Color(0xffFF7417)),),
                                           angle:-90,
                                           positionFactor:0.1,),
 
@@ -197,108 +333,30 @@ class _regenmode extends State<regenmode>{
                                       Padding(
                                         padding: const EdgeInsets.only(bottom:80.0,left:0),
                                         child: Row(
-                                          mainAxisAlignment:MainAxisAlignment.start,
+                                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
                                           children: [
+
+
+
+                                            Icon(Icons.call,size:40,color:Color(0xff323232)),
                                             Padding(
-                                              padding: const EdgeInsets.only(left:0,top:10),
-                                              child: Container(
-                                                  height:30,
-                                                  width:30,
-                                                  decoration:const BoxDecoration(
-                                                    image:DecorationImage(image: ExactAssetImage('assets/images/left.png'),
-                                                      fit:BoxFit.fill,),
-
-                                                  )
-
-                                              ),
+                                              padding: const EdgeInsets.only(left:55.0),
+                                              child: Icon(Icons.message,size:40,color:Color(0xff323232)),
                                             ),
-
-
-
                                             Padding(
-                                              padding: const EdgeInsets.only(left:50.0,top:10),
-                                              child: Container(
-                                                  height:30,
-                                                  width:30,
-                                                  decoration:const BoxDecoration(
-                                                    image:DecorationImage(image: ExactAssetImage('assets/images/high-beam.png'),
-                                                      fit:BoxFit.fill,),
-
-                                                  )
-
-                                              ),
+                                              padding: const EdgeInsets.only(left:55.0),
+                                              child: Icon(Icons.bluetooth,size:40,color:Color(0xff323232)),
                                             ),
-
-
-
                                             Padding(
-                                              padding: const EdgeInsets.only(left:50.0,top:10),
-                                              child: Container(
-                                                  height:30,
-                                                  width:30,
-                                                  decoration:const BoxDecoration(
-                                                    image:DecorationImage(image: ExactAssetImage('assets/images/hazard.png'),
-                                                      fit:BoxFit.fill,),
-
-                                                  )
-
-                                              ),
+                                              padding: const EdgeInsets.only(left:55.0),
+                                              child: Icon(Icons.network_cell,size:40,color:Color(0xff323232)),
                                             ),
-
-
-
-
                                             Padding(
-                                              padding: const EdgeInsets.only(left:50,top:10),
-                                              child: Container(
-                                                  height:30,
-                                                  width:30,
-                                                  decoration:const BoxDecoration(
-                                                    image:DecorationImage(image: ExactAssetImage('assets/images/malfunction.png'),
-                                                      fit:BoxFit.fill,),
-
-                                                  )
-
-                                              ),
-                                            ),
+                                              padding: const EdgeInsets.only(left:55.0),
+                                              child: Icon(Icons.battery_4_bar_rounded,size:40,color:Color(0xff323232)),
+                                            )
 
 
-
-
-
-                                            Padding(
-                                              padding: const EdgeInsets.only(left:50,top:10),
-                                              child: Container(
-                                                  height:30,
-                                                  width:30,
-                                                  decoration:const BoxDecoration(
-                                                    image:DecorationImage(image: ExactAssetImage('assets/images/side_stand.png'),
-                                                      fit:BoxFit.fill,),
-
-                                                  )
-
-                                              ),
-                                            ),
-
-
-
-
-
-
-
-                                            Padding(
-                                              padding: const EdgeInsets.only(left:50,top:10),
-                                              child: Container(
-                                                  height:30,
-                                                  width:30,
-                                                  decoration:const BoxDecoration(
-                                                    image:DecorationImage(image: ExactAssetImage('assets/images/right.png'),
-                                                      fit:BoxFit.fill,),
-
-                                                  )
-
-                                              ),
-                                            ),
                                           ],
                                         ),
                                       ),
@@ -330,7 +388,7 @@ class _regenmode extends State<regenmode>{
                                                 height:50,
                                                 width:70,
                                                 decoration:const BoxDecoration(
-                                                  image:DecorationImage(image: ExactAssetImage('assets/images/battery.png'),
+                                                  image:DecorationImage(image: ExactAssetImage('assets/images/battery3.png'),
                                                     fit:BoxFit.fill,),
 
                                                 )
@@ -374,7 +432,7 @@ class _regenmode extends State<regenmode>{
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.only(left:38.0),
+                        padding: const EdgeInsets.only(left:0.0),
                         child: SizedBox(
                             height:300,
 
@@ -400,7 +458,7 @@ class _regenmode extends State<regenmode>{
 
                   Container(
                     width: 600,
-                    height: 70,
+                    height: 30,
                     // Set the background color for the container
                     child: Row(
                       mainAxisAlignment:MainAxisAlignment.end,
@@ -408,17 +466,6 @@ class _regenmode extends State<regenmode>{
 
 
 
-                        // Expanded(flex:1,
-                        //   child: LinearProgressIndicator(
-                        //     minHeight:30,
-                        //     value: 0.5, // Set the desired progress value
-                        //     backgroundColor: Colors.transparent, // Set the indicator's background color
-                        //
-                        //     valueColor: AlwaysStoppedAnimation<Color>(Colors.blue), // Set the indicator's foreground color
-                        //   ),
-                        // ),
-
-                        // Expanded(flex:1,child: Text("DTE 40KM",style:TextStyle(fontSize:18,fontWeight:FontWeight.bold),)),
                       ],
                     ),
                   ),
@@ -461,7 +508,7 @@ class _regenmode extends State<regenmode>{
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
 
-                              Text("Avg speed 100 km/h",style:GoogleFonts.roboto(
+                              Text("Avg speed $value km/h",style:GoogleFonts.roboto(
                                 fontSize:24,
                                 fontWeight:FontWeight.bold,
                                 color:Colors.black,

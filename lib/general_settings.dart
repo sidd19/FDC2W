@@ -1,8 +1,11 @@
 //This dart file is for power mode
 
+import 'package:flutter_homescreen/menubar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_homescreen/date_time.dart';
+import 'package:flutter_homescreen/menubar.dart';
 
 class general_settings extends StatefulWidget{
 
@@ -64,7 +67,12 @@ class _general_settings  extends State<general_settings >{
 
                 Padding(
                   padding: const EdgeInsets.only(left:90,bottom:360.0),
-                  child: IconButton(onPressed:(){}, icon:Icon(Icons.keyboard_double_arrow_left,size:90,color:Colors.white,),),
+                  child: IconButton(onPressed:(){
+
+                    Navigator.push(context, MaterialPageRoute(builder:(context)=>menubar()));
+
+
+                  }, icon:Icon(Icons.keyboard_double_arrow_left,size:90,color:Colors.white,),),
                 ),
 
                 Padding(
@@ -110,9 +118,19 @@ class _general_settings  extends State<general_settings >{
                         child: ElevatedButton(onPressed:(){
 
 
+
+
+
+
+                           Navigator
+                           .push(context, MaterialPageRoute(builder:(context)=>date_time()));
+
+
                         }, child:Row(
                           mainAxisAlignment:MainAxisAlignment.start,
                           children: [
+
+
 
                             Text("Date",textAlign:TextAlign.start,style:TextStyle(color:Colors.white,fontSize:40,fontWeight:FontWeight.bold),),
                           ],
@@ -128,6 +146,8 @@ class _general_settings  extends State<general_settings >{
                         width:800,
                         height:80,
                         child: ElevatedButton(onPressed:(){
+
+                          showTimePicker(context: context, initialTime: TimeOfDay.now());
 
 
                         }, child:Row(
