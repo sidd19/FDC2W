@@ -1,12 +1,12 @@
 //This dart file is for power mode
 
-import 'package:cluster_v3/menubar.dart';
+import 'package:flutter_homescreen/menubar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cluster_v3/date_time.dart';
-import 'package:cluster_v3/menubar.dart';
-import 'package:cluster_v3/parkingmode.dart';
+import 'package:flutter_homescreen/date_time.dart';
+import 'package:flutter_homescreen/menubar.dart';
+import 'package:flutter_homescreen/parkingmode.dart';
 
 
 class general_settings extends StatefulWidget{

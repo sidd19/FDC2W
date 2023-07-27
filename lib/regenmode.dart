@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cluster_v3/menubar.dart';
+import 'package:flutter_homescreen/menubar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cluster_v3/powermode.dart';
+import 'package:flutter_homescreen/powermode.dart';
 import 'main.dart';
 import 'package:intl/intl.dart';
 

@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cluster_v3/menubar.dart';
-import 'package:cluster_v3/main.dart';
+import 'package:flutter_homescreen/menubar.dart';
+import 'package:flutter_homescreen/main.dart';
 
 class parkingmode extends StatefulWidget{
 
