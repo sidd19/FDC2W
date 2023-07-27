@@ -1,11 +1,13 @@
 //This dart file is for power mode
 
-import 'package:flutter_homescreen/menubar.dart';
+import 'package:cluster_v3/menubar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_homescreen/date_time.dart';
-import 'package:flutter_homescreen/menubar.dart';
+import 'package:cluster_v3/date_time.dart';
+import 'package:cluster_v3/menubar.dart';
+import 'package:cluster_v3/parkingmode.dart';
+
 
 class general_settings extends StatefulWidget{
 
@@ -34,7 +36,7 @@ class _general_settings  extends State<general_settings >{
           child:Container(
 
             height:600,
-            width:1200,
+            width:1024,
             decoration:BoxDecoration(
                 gradient:LinearGradient(colors:[
                   Color(0xffB2BEB5),
@@ -48,7 +50,7 @@ class _general_settings  extends State<general_settings >{
 
                 ),
 
-                borderRadius:BorderRadius.only(topLeft:Radius.circular(100),bottomLeft:Radius.circular(100),topRight:Radius.circular(100),bottomRight:Radius.circular(100)),
+                borderRadius:BorderRadius.only(topLeft:Radius.circular(0),bottomLeft:Radius.circular(0),topRight:Radius.circular(0),bottomRight:Radius.circular(0)),
                 border:Border.all(
 
                   //color:Color(0xffF0FFFF),
@@ -63,18 +65,13 @@ class _general_settings  extends State<general_settings >{
                 ]
             ),
             child:Row(
+              mainAxisAlignment:MainAxisAlignment.spaceAround,
               children: [
 
-                Padding(
-                  padding: const EdgeInsets.only(left:90,bottom:360.0),
-                  child: IconButton(onPressed:(){
+                IconButton(onPressed:(){
 
-                    Navigator.push(context, MaterialPageRoute(builder:(context)=>menubar()));
-
-
-                  }, icon:Icon(Icons.keyboard_double_arrow_left,size:90,color:Colors.white,),),
-                ),
-
+                  Navigator.push(context, MaterialPageRoute(builder:(context)=>menubar()));
+                }, icon:Icon(Icons.keyboard_double_arrow_left,size:80,color:Colors.white,),),
                 Padding(
                   padding: const EdgeInsets.only(left:0.0),
                   child: Column(
@@ -118,19 +115,12 @@ class _general_settings  extends State<general_settings >{
                         child: ElevatedButton(onPressed:(){
 
 
-
-
-
-
-                           Navigator
-                           .push(context, MaterialPageRoute(builder:(context)=>date_time()));
+                          //Navigator.push(context,MaterialPageRoute(builder:(context)=>general_settings()));
 
 
                         }, child:Row(
                           mainAxisAlignment:MainAxisAlignment.start,
                           children: [
-
-
 
                             Text("Date",textAlign:TextAlign.start,style:TextStyle(color:Colors.white,fontSize:40,fontWeight:FontWeight.bold),),
                           ],
@@ -146,8 +136,6 @@ class _general_settings  extends State<general_settings >{
                         width:800,
                         height:80,
                         child: ElevatedButton(onPressed:(){
-
-                          showTimePicker(context: context, initialTime: TimeOfDay.now());
 
 
                         }, child:Row(
@@ -174,7 +162,7 @@ class _general_settings  extends State<general_settings >{
                         }, child:Row(
                           mainAxisAlignment:MainAxisAlignment.start,
                           children: [
-                            Text("Display Settings",textAlign:TextAlign.start,style:TextStyle(color:Colors.white,fontSize:40,fontWeight:FontWeight.bold),),
+                            Text("Display Setttings",textAlign:TextAlign.start,style:TextStyle(color:Colors.white,fontSize:40,fontWeight:FontWeight.bold),),
                           ],
                         ),style:ElevatedButton.styleFrom(backgroundColor:Colors.black,side:BorderSide(color:Colors.white,width:2)),),
                       ),
@@ -204,6 +192,16 @@ class _general_settings  extends State<general_settings >{
 
                     ],
                   ),
+                ),
+
+
+
+                Padding(
+                  padding: const EdgeInsets.only(left:0,bottom:10.0),
+                  child: IconButton(onPressed:(){
+
+                    Navigator.push(context, MaterialPageRoute(builder:(context)=>parkingmode()));
+                  }, icon:Icon(Icons.keyboard_double_arrow_right,size:80,color:Colors.white,),),
                 ),
               ],
             ),

@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_homescreen/menubar.dart';
-import 'package:flutter_homescreen/main.dart';
+import 'package:cluster_v3/menubar.dart';
+import 'package:cluster_v3/main.dart';
 
 class parkingmode extends StatefulWidget{
 
@@ -23,7 +23,7 @@ class _parkingmode extends State<parkingmode>{
 
       body:Center(
           child:Container(
-            width:1200,
+            width:1024,
             height:600,
             color:Color(0xffF0FFFF),
             child: Row(
@@ -34,7 +34,7 @@ class _parkingmode extends State<parkingmode>{
                 IconButton(onPressed:(){
 
                   Navigator.push(context, MaterialPageRoute(builder:(context)=>menubar()));
-                }, icon:Icon(Icons.keyboard_double_arrow_left,size:100,color:Colors.black26,),),
+                }, icon:Icon(Icons.keyboard_double_arrow_left,size:80,color:Colors.black26,),),
 
 
                 Column(
@@ -44,12 +44,12 @@ class _parkingmode extends State<parkingmode>{
                     ),
 
                     Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceAround,
+                      mainAxisAlignment:MainAxisAlignment.center,
                       children: [
                         Container(
                           //margin:const EdgeInsets.only(left:120.0),
                           height:1,
-                          width:800,
+                          width:600,
                           decoration:BoxDecoration(
                               color:Color(0xffF0FFFF),
                               //borderRadius:BorderRadius.only(topLeft:Radius.circular(800),bottomLeft:Radius.circular(800),),
@@ -164,7 +164,7 @@ class _parkingmode extends State<parkingmode>{
                     Row(
                       children: [
                         Container(
-                          width:950,
+                          width:600,
                           margin:EdgeInsets.only(left:0),
                           child:Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
@@ -194,7 +194,7 @@ class _parkingmode extends State<parkingmode>{
                 IconButton(onPressed:(){
 
                   Navigator.push(context, MaterialPageRoute(builder:(context)=>MyHomePage()));
-                }, icon:Icon(Icons.keyboard_double_arrow_right,size:100,color:Colors.black26,),),
+                }, icon:Icon(Icons.keyboard_double_arrow_right,size:80,color:Colors.black26,),),
 
 
               ],

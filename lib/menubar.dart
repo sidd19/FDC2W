@@ -3,9 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_homescreen/general_settings.dart';
-import 'package:flutter_homescreen/regenmode.dart';
-import 'package:flutter_homescreen/parkingmode.dart';
+import 'package:cluster_v3/general_settings.dart';
+import 'package:cluster_v3/regenmode.dart';
+import 'package:cluster_v3/parkingmode.dart';
+import 'package:cluster_v3/bluetooth.dart';
 
 class menubar extends StatefulWidget{
 
@@ -34,7 +35,7 @@ class _menubar  extends State<menubar >{
           child:Container(
 
             height:600,
-            width:1200,
+            width:1024,
             decoration:BoxDecoration(
               gradient:LinearGradient(colors:[
                 Color(0xffB2BEB5),
@@ -48,7 +49,7 @@ class _menubar  extends State<menubar >{
 
               ),
 
-             borderRadius:BorderRadius.only(topLeft:Radius.circular(100),bottomLeft:Radius.circular(100),topRight:Radius.circular(100),bottomRight:Radius.circular(100)),
+             borderRadius:BorderRadius.only(topLeft:Radius.circular(0),bottomLeft:Radius.circular(0),topRight:Radius.circular(0),bottomRight:Radius.circular(0)),
             border:Border.all(
 
             //color:Color(0xffF0FFFF),
@@ -69,7 +70,7 @@ class _menubar  extends State<menubar >{
                  IconButton(onPressed:(){
 
                   Navigator.push(context, MaterialPageRoute(builder:(context)=>regenmode()));
-                }, icon:Icon(Icons.keyboard_double_arrow_left,size:100,color:Colors.white,),),
+                }, icon:Icon(Icons.keyboard_double_arrow_left,size:80,color:Colors.white,),),
                 Padding(
                   padding: const EdgeInsets.only(left:0.0),
                   child: Column(
@@ -136,6 +137,11 @@ class _menubar  extends State<menubar >{
                         child: ElevatedButton(onPressed:(){
 
 
+                          Navigator.push(context, MaterialPageRoute(builder:(context)=>bluetooth()));
+
+
+
+
                         }, child:Row(
                           mainAxisAlignment:MainAxisAlignment.start,
                           children: [
@@ -199,7 +205,7 @@ class _menubar  extends State<menubar >{
                   child: IconButton(onPressed:(){
 
                     Navigator.push(context, MaterialPageRoute(builder:(context)=>parkingmode()));
-                  }, icon:Icon(Icons.keyboard_double_arrow_right,size:100,color:Colors.white,),),
+                  }, icon:Icon(Icons.keyboard_double_arrow_right,size:80,color:Colors.white,),),
                 ),
               ],
             ),

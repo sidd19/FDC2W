@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_homescreen/regenmode.dart';
+import 'package:cluster_v3/regenmode.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_homescreen/main.dart';
+import 'package:cluster_v3/main.dart';
 import 'package:intl/intl.dart';
 
 class powermode extends StatefulWidget{
@@ -20,12 +20,14 @@ class powermode extends StatefulWidget{
 class _powermode extends State<powermode>{
 
   String _currentTime = '';
+  String _date='';
 
   @override
 
   void _updateTime() {
     setState(() {
       // Get the current time and format it as HH:mm:ss
+      _date=DateFormat('E d MMMM').format(DateTime.now());
       _currentTime = DateFormat('HH:mm:ss').format(DateTime.now());
     });
 
@@ -58,7 +60,7 @@ class _powermode extends State<powermode>{
 
             decoration:BoxDecoration(
               color:  Color(0xffffdbac),//Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),
-              borderRadius:BorderRadius.only(topLeft:Radius.elliptical(100,100),bottomLeft:Radius.elliptical(100,100),topRight:Radius.elliptical(100, 100),bottomRight:Radius.elliptical(100, 100)),
+              borderRadius:BorderRadius.only(topLeft:Radius.elliptical(0,0),bottomLeft:Radius.elliptical(0,0),topRight:Radius.elliptical(0, 0),bottomRight:Radius.elliptical(0, 0)),
                 border:Border.all(
                   color:Colors.white,//Color(0xffff6600),//Color(0xff38eeff),
                   width:3,
@@ -80,7 +82,7 @@ class _powermode extends State<powermode>{
 
 
                   Container(
-                    height:60,
+                    height:80,
                     width:600,
                     alignment:Alignment.center,
 
@@ -108,11 +110,17 @@ class _powermode extends State<powermode>{
 
                     child: Padding(
                       padding: const EdgeInsets.only(bottom:0.0),
-                      child: Text(
-                        _currentTime,
-                        style: TextStyle(fontSize: 40,color:Colors.black),
+                      child: Column(
+
+                        children: [
+                          Text("$_date",style:TextStyle(fontSize:20,fontWeight:FontWeight.bold,color:Colors.black),),
+                          Text(
+                            _currentTime,
+                            style: TextStyle(fontSize: 20,color:Colors.black,fontWeight:FontWeight.bold),
 
 
+                          ),
+                        ],
                       ),
                     ),),
                   SizedBox(height:10),
@@ -127,8 +135,8 @@ class _powermode extends State<powermode>{
                           padding: const EdgeInsets.only(top:20),
                           child: Container(
                               height:40,
-                              width:40,
-                            child:left==true?Image.asset('assets/images/colorleftbg.png',fit:BoxFit.fill,):Image.asset('assets/images/left.png',fit:BoxFit.fill,),
+                              width:50,
+                            child:left==true?Image.asset('assets/images/colorleftbg.png',fit:BoxFit.fill,):Image.asset('assets/images/left.png',fit:BoxFit.cover,),
 
                           ),
                         ),
@@ -183,8 +191,8 @@ class _powermode extends State<powermode>{
                           padding: const EdgeInsets.only(left:50,top:10),
                           child: Container(
                               height:40,
-                              width:40,
-                            child:right==true?Image.asset('assets/images/colorrightbg.png',fit:BoxFit.fill,):Image.asset('assets/images/right.png',fit:BoxFit.fill,),
+                              width:50,
+                            child:right==true?Image.asset('assets/images/colorrightbg.png',fit:BoxFit.fill,):Image.asset('assets/images/right.png',fit:BoxFit.cover,),
                           ),
                         ),
 
@@ -353,7 +361,7 @@ class _powermode extends State<powermode>{
                                       ),
 
                                       Padding(
-                                        padding: const EdgeInsets.only(left:50.0,top:60),
+                                        padding: const EdgeInsets.only(left:100.0,top:60),
                                         child: Text("DTE 100km",style:TextStyle(fontSize:24,fontWeight:FontWeight.bold,color:Colors.black),),
                                       ),
                                       Row(
@@ -379,7 +387,7 @@ class _powermode extends State<powermode>{
                                                 height:50,
                                                 width:50,
                                                 decoration:const BoxDecoration(
-                                                  image:DecorationImage(image: ExactAssetImage('assets/images/battery3.png'),
+                                                  image:DecorationImage(image: ExactAssetImage('assets/images/battery_charge.png'),
                                                     fit:BoxFit.fill,),
 
                                                 )

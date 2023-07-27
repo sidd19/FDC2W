@@ -4,18 +4,18 @@
 
 import 'dart:io';
 import 'dart:async';
-import 'package:cluster_copy/regenmode.dart';
+import 'package:cluster_v3/regenmode.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 //import 'package:percent_indicator/percent_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cluster_copy/powermode.dart';
-import 'package:cluster_copy/parkingmode.dart';
-import 'package:cluster_copy/menubar.dart';
-import 'package:cluster_copy/general_settings.dart';
-import 'package:cluster_copy/sound.dart';
-import 'package:cluster_copy/my_vehicle.dart';
-import 'package:cluster_copy/trip_meter.dart';
+import 'package:cluster_v3/powermode.dart';
+import 'package:cluster_v3/parkingmode.dart';
+import 'package:cluster_v3/menubar.dart';
+import 'package:cluster_v3/general_settings.dart';
+import 'package:cluster_v3/sound.dart';
+import 'package:cluster_v3/my_vehicle.dart';
+import 'package:cluster_v3/trip_meter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -90,7 +90,7 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  String _date='';
   String _currentTime = '';
 
   @override
@@ -105,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _updateTime() {
     setState(() {
       // Get the current time and format it as HH:mm:ss
+      _date=DateFormat('E d MMMM').format(DateTime.now());
       _currentTime = DateFormat('HH:mm:ss').format(DateTime.now());
     });
 
@@ -118,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
 double update_value ()
   {
 
-    if(timer==null)
+    if(timer==null )
       {
         timer=Timer.periodic(Duration(milliseconds:500), (_) { setState(() {
 
@@ -132,14 +133,16 @@ double update_value ()
            j=j+1;}
           if(j>20)
             {
-           value=values[i];
-           if(i<=values.length)
+
+           if(i<values.length)
              {
+               value=values[i];
                i++;
              }
-           else if(i>values.length)
+           else
              {
-               i=0;
+              timer?.cancel();
+              print("timer is stopped all values are done");
              }
 
         }});
@@ -149,6 +152,7 @@ double update_value ()
         );
 
       }
+
     return value;
 
   }
@@ -161,6 +165,7 @@ double update_value ()
   void initState() {
   super.initState();
   _updateTime();
+
 
 
   }
@@ -209,7 +214,10 @@ double update_value ()
   // }
   //
 
-
+void cancel_timer()
+{
+  timer?.cancel();
+}
 
 
 
@@ -325,7 +333,7 @@ double update_value ()
 
                     color:Color(0xffFFFE0),//Color(0xffF8F8F8)
 
-                   borderRadius:BorderRadius.only(topLeft:Radius.elliptical(100,100),bottomLeft:Radius.elliptical(100,100),topRight:Radius.elliptical(100, 100),bottomRight:Radius.elliptical(100, 100)),
+                   borderRadius:BorderRadius.only(topLeft:Radius.elliptical(0,0),bottomLeft:Radius.elliptical(0,0),topRight:Radius.elliptical(0, 0),bottomRight:Radius.elliptical(0, 0)),
 
 
 
@@ -350,7 +358,7 @@ double update_value ()
 
 
                   Container(
-                    height:60,
+                    height:80,
                     width:600,
                     alignment:Alignment.center,
 
@@ -378,12 +386,17 @@ double update_value ()
 
                    child: Padding(
                      padding: const EdgeInsets.only(bottom:0.0),
-                     child: Text(
-                        _currentTime,
-                        style: TextStyle(fontSize: 40,color:Colors.black),
+                     child: Column(
+                       children: [
+                         Text("$_date",style:TextStyle(fontSize:20,fontWeight:FontWeight.bold,color:Colors.black),),
+                         Text(
+                            _currentTime,
+                            style: TextStyle(fontSize: 20,color:Colors.black,fontWeight:FontWeight.bold),
 
 
                   ),
+                       ],
+                     ),
                    ),),
                   SizedBox(height:10),
                   SizedBox(
@@ -397,9 +410,9 @@ double update_value ()
                           padding: const EdgeInsets.only(top:20),
                           child: Container(
                               height:40,
-                              width:40,
+                              width:50,
 
-                              child:left==true?Image.asset('assets/images/colorleftbg.png',fit:BoxFit.fill,):Image.asset('assets/images/left.png',fit:BoxFit.fill,),
+                              child:left==true?Image.asset('assets/images/colorleftbg.png',fit:BoxFit.fill,):Image.asset('assets/images/left.png',fit:BoxFit.cover,),
 
                           ),
                         ),
@@ -454,8 +467,8 @@ double update_value ()
                           padding: const EdgeInsets.only(left:50,top:10),
                           child: Container(
                               height:40,
-                              width:40,
-                            child:right==true?Image.asset('assets/images/colorrightbg.png',fit:BoxFit.fill,):Image.asset('assets/images/right.png',fit:BoxFit.fill,),
+                              width:50,
+                            child:right==true?Image.asset('assets/images/colorrightbg.png',fit:BoxFit.fill,):Image.asset('assets/images/right.png',fit:BoxFit.cover,),
                           ),
                         ),
 
@@ -504,8 +517,8 @@ double update_value ()
                                   //
                                   axes: <RadialAxis>[RadialAxis(
                                        minimum:0,maximum:100,isInversed:false,
-                                       startAngle:50,//240,//90
-                                       endAngle:-50,//240,//-90
+                                       startAngle:50,//240,//90  //for now 7/24/2023 50
+                                       endAngle:-50,//240,//-90  //for now 7/24/2023 -50
                                        interval:10,
                                        showLabels:false,
                                        showTicks:false,
@@ -657,7 +670,7 @@ double update_value ()
                                               height:50,
                                               width:50,
                                               decoration:const BoxDecoration(
-                                                image:DecorationImage(image: ExactAssetImage('assets/images/battery3.png'),
+                                                image:DecorationImage(image: ExactAssetImage('assets/images/battery_charge.png'),
                                                 fit:BoxFit.fill,),
 
                                               )
