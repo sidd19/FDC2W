@@ -1,6 +1,6 @@
 {
-    "name": "cluster_v3",
-    "short_name": "cluster_v3",
+    "name": "uart_check",
+    "short_name": "uart_check",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
