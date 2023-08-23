@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   {
 
     super.initState();
-    SerialPort port = SerialPort('/dev/ttyUSB0');
+    SerialPort port = SerialPort('/dev/ttyAMA0');
     port.open(mode: 3);
     port.config.baudRate = 115200;
     port.config.bits=8;
@@ -66,8 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
       print('Baud rate is ${port.config.baudRate}');
 
 
-
-//      port.write(_stringToUinst8List('*E12345 123 1 123456 1 1 1 1 1 1 111K#'));
 
 
 
@@ -128,7 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment:Alignment.center,
           height:600,
           width:800,
-          child:Text('data is $my_data',style:TextStyle(fontSize:20,fontWeight:FontWeight.bold)),
+          child:Text('data is $my_data',style:TextStyle(fontSize:20,fontWeight:FontWeight.bold,color:Colors.black)),
+
         )
     ));
   }
