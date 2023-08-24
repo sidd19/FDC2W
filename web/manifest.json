@@ -1,6 +1,6 @@
 {
-    "name": "uart_check",
-    "short_name": "uart_check",
+    "name": "flutter_homescreen",
+    "short_name": "flutter_homescreen",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
