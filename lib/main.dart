@@ -220,13 +220,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 //this part of code will execute the part of code written inside it at the starting of building of the ui
-  List<String> availablePort = SerialPort.availablePorts;
+  //List<String> availablePort = SerialPort.availablePorts;
   @override
   void initState()
   {
 
   super.initState();
-  SerialPort port = SerialPort('/dev/ttyUSB1');//AMA0
+  /*SerialPort port = SerialPort('/dev/ttyUSB1');//AMA0
     port.open(mode: 3);
     port.config.baudRate = 115200;
     port.config.bits=8;
@@ -274,9 +274,10 @@ class _MyHomePageState extends State<MyHomePage> {
       port.close();
 
     }
+    */
 
 
-  //indicator();
+  indicator();
 
   }
 
