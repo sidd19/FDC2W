@@ -123,9 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
         body: Center(
             child:Container(
+              color:Colors.red,
               alignment:Alignment.center,
               height:600,
-              width:800,
+              width:1024,
               child:Center(child: Container(alignment:Alignment.topLeft,height:40,width:400,color:Colors.blue,child: Text('data is $my_data',style:TextStyle(fontSize:18,fontWeight:FontWeight.bold,color:Colors.black)))),
 
             )
