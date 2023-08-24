@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   {
 
     super.initState();
-    SerialPort port = SerialPort('/dev/ttyAMA0');
+    SerialPort port = SerialPort('/dev/ttyAMA0');//AMA0
     port.open(mode: 3);
     port.config.baudRate = 115200;
     port.config.bits=8;
@@ -121,14 +121,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
 
-      body: Center(
-        child:Container(
-          alignment:Alignment.center,
-          height:600,
-          width:800,
-          child:Text('data is $my_data',style:TextStyle(fontSize:20,fontWeight:FontWeight.bold,color:Colors.black)),
+        body: Center(
+            child:Container(
+              alignment:Alignment.center,
+              height:600,
+              width:800,
+              child:Center(child: Container(alignment:Alignment.topLeft,height:40,width:400,color:Colors.blue,child: Text('data is $my_data',style:TextStyle(fontSize:18,fontWeight:FontWeight.bold,color:Colors.black)))),
 
-        )
-    ));
+            )
+        ));
   }
 }
