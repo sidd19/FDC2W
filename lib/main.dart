@@ -298,7 +298,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 //this part of code will execute the part of code written inside it at the starting of building of the ui
-  List<String> availablePort = SerialPort.availablePorts;
+  //List<String> availablePort = SerialPort.availablePorts;
   @override
   void initState()
   {
