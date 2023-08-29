@@ -46,6 +46,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_libserialport: ^0.3.0
   libserialport: ^0.3.0+1
+  dart_periphery: ^0.9.5
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - textnotes/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

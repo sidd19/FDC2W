@@ -24,7 +24,7 @@ final String Movie = "Sanju";
 
 
 double playbackProgress = 1.0;
-List <double> values=[14,12,13,14,15,16,12,13,14,15,16,18,20,24,26,34,46,14,12,30,32];
+//List <double> values=[14,12,13,14,15,16,12,13,14,15,16,18,20,24,26,34,46,14,12,30,32];
 int i=0;
 int j=0;
 

@@ -13,6 +13,7 @@ import 'package:flutter_homescreen/parkingmode.dart';
 import 'package:flutter_homescreen/menubar.dart';
 import 'package:flutter_homescreen/splashscreen.dart';
 import 'package:flutter_homescreen/sound.dart';
+import 'package:flutter/services.dart' show rootBundle ;
 
 //end of user defined files
 
@@ -24,8 +25,19 @@ import 'dart:typed_data';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+
+import 'package:dart_periphery/dart_periphery.dart';
 //end of external added package files
 String my_data='';
+
+List<String> gaugeValues = [];
+List<String> speedValues=[];
+double b=0;
+String  c='';
+String avgspeed='';
+String avgspeeddata='';
+
+
 
 //main function
 void main() {
@@ -191,20 +203,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
 //updare_value:This function is used to update the value of the gauge by taking input from the list
   double update_value () {
-    if (timer1 == null) {
-      timer1 = Timer.periodic(Duration(milliseconds: 500), (_) {
-        setState(() {
-          if (i < values.length)
-          {
 
-            value = values[i];
+    if (timer1 == null) {
+
+      timer1 = Timer.periodic(Duration(milliseconds: 2000), (_) {
+
+        setState(() {
+          loadGaugeValues();
+          if (i<gaugeValues.length)
+          {
+            //b=gaugeValues .elementAt(i);
+            c=speedValues.elementAt(i);
+
+
+           // value = values[i];
             i++;
 
           }
           else
 
           {
-            timer1?.cancel();
+            i=0;
+            timer1=null;
+            //timer1?.cancel();
             print("timer1 is stopped all values are done");
 
           }
@@ -218,15 +239,72 @@ class _MyHomePageState extends State<MyHomePage> {
 //end of update_value function
 
 
+  //function to read data from a file that is stored in assets
+
+  Future<void> loadGaugeValues() async {
+
+
+    try {
+      String fileContents = await rootBundle.loadString('textnotes/gaugedata.txt');
+      List<String> lines = fileContents.split('\n');
+
+      List<String> values = [];
+      List<String>svalues=[];
+      for (String line in lines) {
+
+        String? value = line;
+        String? svalue=value.toString();
+        if (value != null) {
+          values.add(value);
+          svalues.add(svalue);
+
+
+        }
+      }
+
+      setState(() {
+        gaugeValues = values;
+        speedValues=svalues;
+
+
+      });
+    }  catch (e) {
+      print('Error loading gauge values: $e');
+    }
+  }
+  //////////function end
+
+  //write data in to gauge
+
+
+  Future<void> increase() async
+  {
+    for (var i=0;i<gaugeValues.length;i++){
+
+      // String c=a .elementAt(i).toString();
+      // double d=double.parse(c);
+      // b=gaugeValues .elementAt(i);
+      await Future.delayed(const Duration(milliseconds:1000));
+      setState(() {
+       // b=gaugeValues .elementAt(i);
+        //c=(b/10)*1000;
+
+      });
+
+    }}
+
+  //////////////////////////write end
+
+
 
 //this part of code will execute the part of code written inside it at the starting of building of the ui
   List<String> availablePort = SerialPort.availablePorts;
   @override
   void initState()
   {
-
+ /*
   super.initState();
-  SerialPort port = SerialPort('/dev/ttyUSB0');//AMA0
+  SerialPort port = SerialPort('/dev/ttyAMA0');//AMA0
     port.open(mode: 3);
     port.config.baudRate = 115200;
     port.config.bits=8;
@@ -236,6 +314,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
     try {
+
+
 
       print('Serial port opened: $port');
       print('Baud rate is ${port.config.baudRate}');
@@ -269,15 +349,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
     } on SerialPortError catch (err, _) {
 
+
+
+
       print(SerialPort.lastError);
+        ;
 
       port.close();
 
-    }
-    
+    }*/
 
 
-  indicator();
+   // indicator();
+    update_value();
+
+
 
   }
 
@@ -610,8 +696,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                          animationType:AnimationType.ease,
 
                                       ),
-                                        RangePointer(value:value, width:35, color:get_guage_color() ,pointerOffset:5,) ,
-                                        MarkerPointer(value:value,markerOffset:3,markerWidth:5,markerHeight:35,color:Colors.white,borderWidth:0,)//Color(0xffFCD12A)get_guage_color()
+                                        RangePointer(value:0, width:35, color:get_guage_color() ,pointerOffset:5,) ,
+                                        MarkerPointer(value:0,markerOffset:3,markerWidth:5,markerHeight:35,color:Colors.white,borderWidth:0,)//Color(0xffFCD12A)get_guage_color()
                                         //MarkerPointer(value:value,markerOffset:35,markerWidth:40,markerType: MarkerType.image,markerHeight:50,color:get_guage_color(),borderWidth:0,imageUrl:"assets/images/bike_blue.png",)//Color(0xffFCD12A)                //0xff0FFF50 for eco mode
                                       ],
 
@@ -900,7 +986,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           mainAxisAlignment:MainAxisAlignment.spaceAround,
                           children: [
 
-                            Text("Avg speed $my_data km/h",style:GoogleFonts.roboto(
+                            Text("Avg speed $c km/h",style:GoogleFonts.roboto(
                               fontSize:20,
                               fontWeight:FontWeight.bold,
                               color:Colors.black,
