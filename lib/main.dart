@@ -7,39 +7,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:dart_periphery/dart_periphery.dart';
+var spi = SPI(0, 0, SPImode.mode0, 1000000);
+var bme280 = BME280.spi(spi);
+var r = bme280.getValues();
 
 void main() {
- var config = GPIOconfig.defaultValues();
-  config.direction = GPIOdirection.gpioDirOut;
-  print('Native c-periphery Version :  ${getCperipheryVersion()}');
-  print('GPIO test');
-  var gpio = GPIO(18, GPIOdirection.gpioDirOut);
-  var gpio2 = GPIO(16, GPIOdirection.gpioDirOut);
 
-  var gpio3 = GPIO.advanced(5, config);
-
-  print('GPIO info: ${gpio.getGPIOinfo()}');
-
-  print('GPIO native file handle: ${gpio.getGPIOfd()}');
-  print('GPIO chip name: ${gpio.getGPIOchipName()}');
-  print('GPIO chip label: ${gpio.getGPIOchipLabel()}');
-  print('GPIO chip name: ${gpio.getGPIOchipName()}');
-  print('CPIO chip label: ${gpio.getGPIOchipLabel()}');
-
-  for (var i = 0; i < 10; ++i) {
-    gpio.write(true);
-    gpio2.write(true);
-    gpio3.write(true);
-    Future.delayed(Duration(milliseconds: 200));
-    gpio.write(false);
-    gpio2.write(false);
-    gpio3.write(false);
-    Future.delayed(Duration(milliseconds: 200));
-  }
-
-  gpio.dispose();
-  gpio2.dispose();
-  gpio3.dispose();
   runApp(const MyApp());
 }
 
@@ -78,6 +51,19 @@ class _MyHomePageState extends State<MyHomePage> {
   {
     super.initState();
 
+
+
+      try {
+        print('SPI info:' + spi.getSPIinfo());
+
+        print('Temperature [°] ${r.temperature.toStringAsFixed(1)}');
+        print('Humidity [%] ${r.humidity.toStringAsFixed(1)}');
+        print('Pressure [hPa] ${r.pressure.toStringAsFixed(1)}');
+      } finally {
+        spi.dispose();
+      }
+
+
   }
 
 
@@ -90,6 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
+        child:Column(
+          children: [Text("data is $r",style:TextStyle(color:Colors.blue),//data
+          )],
+        )
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
 
