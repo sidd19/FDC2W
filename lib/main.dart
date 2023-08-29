@@ -226,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
   {
 
   super.initState();
-  SerialPort port = SerialPort('/dev/serial0');//AMA0
+  SerialPort port = SerialPort('/dev/ttyUSB0');//AMA0
     port.open(mode: 3);
     port.config.baudRate = 115200;
     port.config.bits=8;
