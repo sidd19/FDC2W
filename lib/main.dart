@@ -189,54 +189,55 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
-
+        speedD = line.substring(8, 11)??'0';
+        //
         String? value = line;
 
-        if (line.isNotEmpty && line.startsWith('*E') && line.endsWith('K#')) {
-          rpmD = line.substring(2, 7);
-          print('rpm is $rpmD');
-          speedD = line.substring(8, 11);
-
-          print('speed is $speedD');
-          fuelLevelD = line.substring(12, 13);
-          print('fuel level is $fuelLevelD');
-
-          odometerD = line.substring(14, 20);
-          print('odo meter rating is $odometerD');
-          headLampD = line.substring(21, 22);
-          print('headlamp status is $headLampD');
-          gearD = line.substring(23, 24);
-          print('gear status is $gearD');
-          leftIndicatorD = line.substring(25, 26);
-          print('left indicator status is $leftIndicatorD');
-          rightIndicatorD = line.substring(27, 28);
-          print('right indicator status is $rightIndicatorD');
-          modeD = line.substring(29, 30);
-          print('mode status is $rightIndicatorD');
-          serviceD = line.substring(31, 32);
-          print('serviceD status is $serviceD');
-          batteryD = line.substring(32, 34);
-          print('batteryD status is $batteryD');
-          assistD = line.substring(34, 35);
-          print('assistD status is $assistD');
-          KeyIPD = line.substring(35, 36);
-          print('keyIPD status is $KeyIPD');
-
-
-
-
-        } else {
-          if (line.isNotEmpty) {
-            print('data frame is incorrect');
-          } else {
-            line = lines.last;
-          }
-          String? svalue = value.toString();
-          if (value != null) {
-            values.add(value);
-            svalues.add(svalue);
-          }
-        }
+        // if (line.isNotEmpty && line.startsWith('*E') && line.endsWith('K#')) {
+        //   rpmD = line.substring(2, 7);
+        //   print('rpm is $rpmD');
+        //   speedD = line.substring(8, 11)??'0';
+        //
+        //   print('speed is $speedD');
+        //   fuelLevelD = line.substring(12, 13);
+        //   print('fuel level is $fuelLevelD');
+        //
+        //   odometerD = line.substring(14, 20);
+        //   print('odo meter rating is $odometerD');
+        //   headLampD = line.substring(21, 22);
+        //   print('headlamp status is $headLampD');
+        //   gearD = line.substring(23, 24);
+        //   print('gear status is $gearD');
+        //   leftIndicatorD = line.substring(25, 26);
+        //   print('left indicator status is $leftIndicatorD');
+        //   rightIndicatorD = line.substring(27, 28);
+        //   print('right indicator status is $rightIndicatorD');
+        //   modeD = line.substring(29, 30);
+        //   print('mode status is $rightIndicatorD');
+        //   serviceD = line.substring(31, 32);
+        //   print('serviceD status is $serviceD');
+        //   batteryD = line.substring(32, 34);
+        //   print('batteryD status is $batteryD');
+        //   assistD = line.substring(34, 35);
+        //   print('assistD status is $assistD');
+        //   KeyIPD = line.substring(35, 36);
+        //   print('keyIPD status is $KeyIPD');
+        //
+        //
+        //
+        //
+        // } else {
+        //   if (line.isNotEmpty) {
+        //     print('data frame is incorrect');
+        //   } else {
+        //     line = lines.last;
+        //   }
+        //   String? svalue = value.toString();
+        //   if (value != null) {
+        //     values.add(value);
+        //     svalues.add(svalue);
+        //   }
+        // }
 
         // });
       }
