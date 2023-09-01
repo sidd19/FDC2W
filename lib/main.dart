@@ -2,6 +2,7 @@
 import 'dart:io'; //for input /output file operations
 import 'dart:async'; //for asyncronous or timer related functions
 import 'package:flutter/material.dart'; //all the ui related widgets
+import 'package:flutter_homescreen/general_settings.dart';
 //user defined files
 import 'package:flutter_homescreen/variables_func.dart';
 import 'package:flutter_homescreen/regenmode.dart';
@@ -137,6 +138,11 @@ class _MyHomePageState extends State<MyHomePage> {
     if (timer1 == null) {
       timer1 = Timer.periodic(Duration(milliseconds: 1000), (_) {
         setState(() {
+          /*The choose screen function will switch the screen to left or right
+           according to the input frame keyip it will manage the current state and store the index of the screen*/
+            //choose_screen();
+
+         /*This will brake the frames and split the frame in to substring to pass the value to all variable*/
           loadGaugeValues();
         });
       });
@@ -164,18 +170,25 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           // b=gaugeValues .elementAt(i);
           //c=(b/10)*1000;
+
           speedr = speedD;
           odometerr = odometerD;
           leftIndicatorr = leftIndicatorD;
 
           rightIndicatorr = rightIndicatorD;
           headLampr = headLampD;
+          move=KeyIPD;
+
           Future.delayed(Duration(milliseconds:500), () {
             leftIndicatorr == '1' ? left = !left : left = false;
             rightIndicatorr == '1' ? right = !right : right = false;
           });
 
         });
+
+
+
+
 
         String? value = line;
 
@@ -208,6 +221,10 @@ class _MyHomePageState extends State<MyHomePage> {
           print('assistD status is $assistD');
           KeyIPD = line.substring(35, 36);
           print('keyIPD status is $KeyIPD');
+
+
+
+
         } else {
           if (line.isNotEmpty) {
             print('data frame is incorrect');
@@ -870,6 +887,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               IconButton(
                                 onPressed: () {
+                                  currentScreenIndex=2;
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -984,18 +1002,22 @@ class _MyHomePageState extends State<MyHomePage> {
   {
     if(currentScreenIndex==1)
     {
-      if(page==3)
+      if(move=='2')
+      {
+        currentScreenIndex=4;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>menubar()));
+
+      }
+      else if(move=='3')
       {
         currentScreenIndex=2;
-        //Navigator.pushNamed(context, '/Second');
         Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
 
       }
-      else if(value==2)
-      {
-
-        Navigator.pop(context);
-
+      else{
+        currentScreenIndex=currentScreenIndex;
+        move='4';
       }
     }
 
@@ -1003,17 +1025,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
     else if(currentScreenIndex==2)
     {
-      if(page==3)
+      if(move=='2')
       {
-        currentScreenIndex=3;
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>regenmode()));
+        currentScreenIndex=1;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>MyHomePage()));
 
       }
-      else if(page==2)
+      else if(move=='3')
       {
-        currentScreenIndex=2;
-        Navigator.pop(context);
+        currentScreenIndex=3;
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>regenmode()));
 
+      }
+
+      else{
+        currentScreenIndex=currentScreenIndex;
+        move='4';
       }
     }
 
@@ -1021,34 +1049,49 @@ class _MyHomePageState extends State<MyHomePage> {
 
     else if(currentScreenIndex==3)
     {
-      if(page==3)
+      if(move=='2')
       {
-        currentScreenIndex=4;
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>menubar()));
+        currentScreenIndex=2;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
 
       }
-      else if(page==2)
+      else if(move=='3')
       {
-        currentScreenIndex=3;
-        Navigator.pop(context);
+        currentScreenIndex=4;
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>menubar()));
 
+      }
+
+      else{
+        currentScreenIndex=currentScreenIndex;
+        move='4';
       }
     }
 
     /////////////////////////////////
 
-    else if(currentScreenIndex==2)
+    else if(currentScreenIndex==4)
     {
-      if(page==3)
+      if(move=='2')
       {
-        currentScreenIndex=5;
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>parkingmode()));
+        currentScreenIndex=3;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>regenmode()));
 
       }
-      else if(value==2)
+      else if(move=='3')
       {
-        currentScreenIndex=4;
-        Navigator.pop(context);
+        currentScreenIndex=1;
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>MyHomePage()));
+
+      }
+
+      else{
+        currentScreenIndex=currentScreenIndex;
+        move='4';
+
+
 
       }
     }

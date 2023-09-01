@@ -253,15 +253,17 @@ class _regenmode extends State<regenmode> {
                     padding: const EdgeInsets.all(0.0),
                     child: InkWell(
                       onTap: () {
+                        currentScreenIndex=4;
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => powermode()));
+                                builder: (context) => menubar()));
                       },
                       child: SizedBox(
                         height: 300,
                         child: IconButton(
                           onPressed: () {
+                            currentScreenIndex=2;
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -602,6 +604,7 @@ class _regenmode extends State<regenmode> {
                             children: [
                               IconButton(
                                 onPressed: () {
+                                  currentScreenIndex=4;
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

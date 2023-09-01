@@ -598,10 +598,11 @@ class _powermode extends State<powermode> {
                     padding: const EdgeInsets.only(left: 0.0),
                     child: InkWell(
                       onTap: () {
+                        currentScreenIndex=1;
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => regenmode()));
+                                builder: (context) => MyHomePage()));
                       },
                       child: SizedBox(
                           height: 300,
@@ -610,6 +611,7 @@ class _powermode extends State<powermode> {
                             children: [
                               IconButton(
                                 onPressed: () {
+                                  currentScreenIndex=3;
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

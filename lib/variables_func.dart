@@ -30,6 +30,7 @@ double playbackProgress = 1.0;
 //List <double> values=[14,12,13,14,15,16,12,13,14,15,16,18,20,24,26,34,46,14,12,30,32];
 int i=0;
 int j=0;
+String move='1';//it is used to switch between the pages
 
 //These variables will store data of the frame
 /*Variables that ends with character D are directly take substring data that broke down from the lines
