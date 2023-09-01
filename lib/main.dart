@@ -71,16 +71,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _date = '';
   String _currentTime = '';
-  final counterStorage = CounterStorage();
-  //print('Available Port: $availablePort');
+  final counterStorage = CounterStorage();//we are creating the object for the counter storage class
+
 
   @override
 
-  //uart code part
-
-  //port.openReadWrite();
-
-  //uart logic end
 
   // Initialize the gauge values
   //this function is used to update the time
@@ -115,21 +110,15 @@ class _MyHomePageState extends State<MyHomePage> {
       timer = Timer.periodic(Duration(milliseconds: 1000), (_) {
         setState(() {
           if (i <= 6) {
-            //serial();
+
             i = i + 1;
           } else {
             timer?.cancel();
           }
 
           if (j <= 6) {
-            left = !left;
-            right = !right;
-            hazard = !hazard;
-            malfunction = !malfunction;
-            highbeam = !highbeam;
-            side_stand = !side_stand;
-            parking_mode = !parking_mode;
-            parking_brake = !parking_brake;
+            indicator_Blinker();
+
             j = j + 1;
           } else {
             timer?.cancel();
@@ -701,11 +690,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Icon(Icons.call,
-                                          size: 40, color: Color(0xff323232)),
+                                      Stack(
+                                        children: [
+                                              Container(
+                                                alignment:Alignment.topLeft,
+                                                height:40,width:80,
+                                                child: Icon(Icons.call,
+                                                size: 40, color: Color(0xff323232)),
+                                              ),
+
+                                              Positioned(left:20,child: Text("jai calling")),
+                                            ],
+                                      ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 55.0),
+                                            const EdgeInsets.only(left: 15.0),
                                         child: Icon(Icons.message,
                                             size: 40, color: Color(0xff323232)),
                                       ),
@@ -976,4 +975,133 @@ class _MyHomePageState extends State<MyHomePage> {
       )),
     );
   }
+
+
+
+  //page changes
+
+  void choose_screen()
+  {
+    if(currentScreenIndex==1)
+    {
+      if(page==3)
+      {
+        currentScreenIndex=2;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
+
+      }
+      else if(value==2)
+      {
+
+        Navigator.pop(context);
+
+      }
+    }
+
+    //////////////////////////////////////////////
+
+    else if(currentScreenIndex==2)
+    {
+      if(page==3)
+      {
+        currentScreenIndex=3;
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>regenmode()));
+
+      }
+      else if(page==2)
+      {
+        currentScreenIndex=2;
+        Navigator.pop(context);
+
+      }
+    }
+
+    /////////////////////////////////
+
+    else if(currentScreenIndex==3)
+    {
+      if(page==3)
+      {
+        currentScreenIndex=4;
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>menubar()));
+
+      }
+      else if(page==2)
+      {
+        currentScreenIndex=3;
+        Navigator.pop(context);
+
+      }
+    }
+
+    /////////////////////////////////
+
+    else if(currentScreenIndex==2)
+    {
+      if(page==3)
+      {
+        currentScreenIndex=5;
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>parkingmode()));
+
+      }
+      else if(value==2)
+      {
+        currentScreenIndex=4;
+        Navigator.pop(context);
+
+      }
+    }
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////
 }

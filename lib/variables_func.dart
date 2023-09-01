@@ -73,7 +73,8 @@ double b = 0;
 String c = '';
 String avgspeed = '';
 String avgspeeddata = '';
-
+int currentScreenIndex=1;
+int page=1 ;
 
 
 /*The get gauge color function will return the color
@@ -142,7 +143,7 @@ class CounterStorage {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('dataframes.txt'); // Corrected the path
+    return File('textnotes/gaugedata.txt'); // Corrected the path
   }
 
   Future<String> readCounter() async {
@@ -169,7 +170,19 @@ class CounterStorage {
 //end of initialization of thE Class
 
 
+/*functions to blink the indicators*/
 
+void indicator_Blinker()
+{
+  left = !left;
+  right = !right;
+  hazard = !hazard;
+  malfunction = !malfunction;
+  highbeam = !highbeam;
+  side_stand = !side_stand;
+  parking_mode = !parking_mode;
+  parking_brake = !parking_brake;
+}
 
 
 

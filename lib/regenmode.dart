@@ -56,7 +56,7 @@ class _regenmode extends State<regenmode> {
         width: 1024,
         decoration: BoxDecoration(
             color: Color(
-                0xffffdbac), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),
+                0xffffdbac), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),0xffffdbac
             borderRadius: BorderRadius.only(
                 topLeft: Radius.elliptical(0, 0),
                 bottomLeft: Radius.elliptical(0, 0),
