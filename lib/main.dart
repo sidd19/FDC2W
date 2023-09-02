@@ -190,6 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
         speedD = line.substring(8, 11)??'0';
+        print('$speedD');
         //
         String? value = line;
 

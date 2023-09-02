@@ -144,7 +144,7 @@ class CounterStorage {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('textnotes/gaugedata.txt'); // Corrected the path
+    return File('lib/gaugedata.txt'); // Corrected the path
   }
 
   Future<String> readCounter() async {
