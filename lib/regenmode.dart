@@ -56,7 +56,7 @@ class _regenmode extends State<regenmode> {
         width: 1024,
         decoration: BoxDecoration(
             color: Color(
-                0xffffdbac), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),0xffffdbac
+                0xffffdbac), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),
             borderRadius: BorderRadius.only(
                 topLeft: Radius.elliptical(0, 0),
                 bottomLeft: Radius.elliptical(0, 0),
@@ -253,17 +253,15 @@ class _regenmode extends State<regenmode> {
                     padding: const EdgeInsets.all(0.0),
                     child: InkWell(
                       onTap: () {
-                        currentScreenIndex=4;
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => menubar()));
+                                builder: (context) => powermode()));
                       },
                       child: SizedBox(
                         height: 300,
                         child: IconButton(
                           onPressed: () {
-                            currentScreenIndex=2;
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -604,7 +602,6 @@ class _regenmode extends State<regenmode> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  currentScreenIndex=4;
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

@@ -122,7 +122,6 @@ class _menubar  extends State<menubar >{
                         child: ElevatedButton(onPressed:(){
 
 
-
                           Navigator.push(context,MaterialPageRoute(builder:(context)=>general_settings()));
 
 
