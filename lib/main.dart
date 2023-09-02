@@ -1,6 +1,8 @@
 //importing all the required package
 import 'dart:io'; //for input /output file operations
 import 'dart:async'; //for asyncronous or timer related functions
+import 'package:path/path.dart';
+import 'package:safe_local_storage/safe_local_storage.dart';
 import 'package:flutter/material.dart'; //all the ui related widgets
 import 'package:flutter_homescreen/general_settings.dart';
 //user defined files
@@ -23,6 +25,7 @@ import 'dart:typed_data';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+
 
 
 //end of external added package files
@@ -156,92 +159,99 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> loadGaugeValues() async {
     try {
 
-          counterStorage.readCounter().then((value){ frame=value;
-            print(frame);
-          });
-              
+          // counterStorage.readCounter().then((value){ frame=value;
+          //   print(frame);
+          // });
 
-          List<String> lines = frame.toString().split('\n');
+          //final storage = SafeLocalStorage('lib/gaugedata.txt');
+          //final data = await storage.read();
+         // print(data);
+          File('textnotes/gaugedata.txt').readAsString().then((String contents) {
 
-           List<String> values = [];
-           List<String> svalues = [];
-           for (String line in lines) {
-        //await Future.delayed(const Duration(milliseconds: 1000));
-        setState(() {
-          // b=gaugeValues .elementAt(i);
-          //c=(b/10)*1000;
-
-          speedr = speedD;
-          odometerr = odometerD;
-          leftIndicatorr = leftIndicatorD;
-
-          rightIndicatorr = rightIndicatorD;
-          headLampr = headLampD;
-          move=KeyIPD;
-
-          Future.delayed(Duration(milliseconds:500), () {
-            leftIndicatorr == '1' ? left = !left : left = false;
-            rightIndicatorr == '1' ? right = !right : right = false;
+            local_data=contents;
+            print(contents);
           });
 
-        });
+
+          List<String> lines = local_data.toString().split('\n');
+
+          List<String> values = [];
+          List<String> svalues = [];
+          for (String line in lines) {
+            //await Future.delayed(const Duration(milliseconds: 1000));
+            setState(() {
+              // b=gaugeValues .elementAt(i);
+              //c=(b/10)*1000;
+
+              speedr = speedD;
+              odometerr = odometerD;
+              leftIndicatorr = leftIndicatorD;
+
+              rightIndicatorr = rightIndicatorD;
+              headLampr = headLampD;
+              move=KeyIPD;
+
+              Future.delayed(Duration(milliseconds:500), () {
+                leftIndicatorr == '1' ? left = !left : left = false;
+                rightIndicatorr == '1' ? right = !right : right = false;
+              });
+
+            });
 
 
 
 
-        speedD = line.substring(8, 11)??'0';
-        print('$speedD');
-        //
-        String? value = line;
 
-        // if (line.isNotEmpty && line.startsWith('*E') && line.endsWith('K#')) {
-        //   rpmD = line.substring(2, 7);
-        //   print('rpm is $rpmD');
-        //   speedD = line.substring(8, 11)??'0';
-        //
-        //   print('speed is $speedD');
-        //   fuelLevelD = line.substring(12, 13);
-        //   print('fuel level is $fuelLevelD');
-        //
-        //   odometerD = line.substring(14, 20);
-        //   print('odo meter rating is $odometerD');
-        //   headLampD = line.substring(21, 22);
-        //   print('headlamp status is $headLampD');
-        //   gearD = line.substring(23, 24);
-        //   print('gear status is $gearD');
-        //   leftIndicatorD = line.substring(25, 26);
-        //   print('left indicator status is $leftIndicatorD');
-        //   rightIndicatorD = line.substring(27, 28);
-        //   print('right indicator status is $rightIndicatorD');
-        //   modeD = line.substring(29, 30);
-        //   print('mode status is $rightIndicatorD');
-        //   serviceD = line.substring(31, 32);
-        //   print('serviceD status is $serviceD');
-        //   batteryD = line.substring(32, 34);
-        //   print('batteryD status is $batteryD');
-        //   assistD = line.substring(34, 35);
-        //   print('assistD status is $assistD');
-        //   KeyIPD = line.substring(35, 36);
-        //   print('keyIPD status is $KeyIPD');
-        //
-        //
-        //
-        //
-        // } else {
-        //   if (line.isNotEmpty) {
-        //     print('data frame is incorrect');
-        //   } else {
-        //     line = lines.last;
-        //   }
-        //   String? svalue = value.toString();
-        //   if (value != null) {
-        //     values.add(value);
-        //     svalues.add(svalue);
-        //   }
-        // }
+            String? value = line;
 
-        // });
-      }
+            if (line.isNotEmpty && line.startsWith('*E') && line.endsWith('K#')) {
+              rpmD = line.substring(2, 7);
+              print('rpm is $rpmD');
+              speedD = line.substring(8, 11);
+
+              print('speed is $speedD');
+              fuelLevelD = line.substring(12, 13);
+              print('fuel level is $fuelLevelD');
+
+              odometerD = line.substring(14, 20);
+              print('odo meter rating is $odometerD');
+              headLampD = line.substring(21, 22);
+              print('headlamp status is $headLampD');
+              gearD = line.substring(23, 24);
+              print('gear status is $gearD');
+              leftIndicatorD = line.substring(25, 26);
+              print('left indicator status is $leftIndicatorD');
+              rightIndicatorD = line.substring(27, 28);
+              print('right indicator status is $rightIndicatorD');
+              modeD = line.substring(29, 30);
+              print('mode status is $rightIndicatorD');
+              serviceD = line.substring(31, 32);
+              print('serviceD status is $serviceD');
+              batteryD = line.substring(32, 34);
+              print('batteryD status is $batteryD');
+              assistD = line.substring(34, 35);
+              print('assistD status is $assistD');
+              KeyIPD = line.substring(35, 36);
+              print('keyIPD status is $KeyIPD');
+
+
+
+
+            } else {
+              if (line.isNotEmpty) {
+                print('data frame is incorrect');
+              } else {
+                line = lines.last;
+              }
+              String? svalue = value.toString();
+              if (value != null) {
+                values.add(value);
+                svalues.add(svalue);
+              }
+            }
+
+            // });
+          }
     } catch (e) {
       print('Error loading gauge values: $e');
     }
@@ -1000,7 +1010,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //page changes
 
-  void choose_screen()
+  /*void choose_screen()
   {
     if(currentScreenIndex==1)
     {
@@ -1098,7 +1108,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
 
-
+*/
 
 
 
@@ -1149,4 +1159,4 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 ///////////////////////////////////////////////////////
-}
+

@@ -270,6 +270,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.26.0"
+  safe_local_storage:
+    dependency: "direct main"
+    description:
+      name: safe_local_storage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -317,6 +324,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "20.4.54"
+  synchronized:
+    dependency: transitive
+    description:
+      name: synchronized
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   term_glyph:
     dependency: transitive
     description:

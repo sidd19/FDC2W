@@ -5,9 +5,11 @@ import 'dart:async';
 import 'dart:io' ;
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
+import 'package:safe_local_storage/safe_local_storage.dart';
 
 //variables for signals
-
+String local_data='';
 String frame='';
 double value=0;
 double speed=0;
@@ -149,11 +151,14 @@ class CounterStorage {
 
   Future<String> readCounter() async {
     try {
-      final fileContents = await _localFile;
+      // final fileContents = await _localFile;
+      final storage = SafeLocalStorage('lib/gaugedata.txt');
+      final data = await storage.read();
+      print(data);
 
 
 
-      return  await fileContents.readAsString();
+      return  await data.readAsString();
 
     } catch (e) {
       // Provide more specific error handling or logging.
