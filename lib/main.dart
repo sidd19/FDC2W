@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //updare_value:This function is used to update the value of the gauge by taking input from the list
   double update_value() {
     if (timer1 == null) {
-      timer1 = Timer.periodic(Duration(milliseconds: 1000), (_) {
+      timer1 = Timer.periodic(Duration(milliseconds: 400), (_) {
         setState(() {
           /*The choose screen function will switch the screen to left or right
            according to the input frame keyip it will manage the current state and store the index of the screen*/
@@ -159,7 +159,8 @@ class _MyHomePageState extends State<MyHomePage> {
           counterStorage.readCounter().then((value){ frame=value;
             print(frame);
           });
-              
+
+
 
           List<String> lines = frame.toString().split('\n');
 
@@ -256,8 +257,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    indicator();
-    //update_value();
+    //indicator();
+    update_value();
   }
 
 //end of init state function
@@ -716,7 +717,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 size: 40, color: Color(0xff323232)),
                                               ),
 
-                                              Positioned(left:20,child: Text("jai calling")),
+                                              //Positioned(left:20,child: Text("jai calling")),
                                             ],
                                       ),
                                       Padding(

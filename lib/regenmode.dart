@@ -56,21 +56,21 @@ class _regenmode extends State<regenmode> {
         width: 1024,
         decoration: BoxDecoration(
             color: Color(
-                0xffffdbac), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),0xffffdbac
+                0xffF0FFFF), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),0xffffdbac
             borderRadius: BorderRadius.only(
                 topLeft: Radius.elliptical(0, 0),
                 bottomLeft: Radius.elliptical(0, 0),
                 topRight: Radius.elliptical(0, 0),
                 bottomRight: Radius.elliptical(0, 0)),
             border: Border.all(
-              color: Colors.white, //Color(0xffff6600),//Color(0xff38eeff),
+              color: Color(0xffF0FFFF), //Color(0xffff6600),//Color(0xff38eeff),
               width: 3,
             ),
             boxShadow: [
               BoxShadow(
                 blurRadius: 11,
                 spreadRadius: 11,
-                color: Colors.white, //Color(0xffff6600),//Color(0xff38eeff),
+                color: Colors.black26, //Color(0xffff6600),//Color(0xff38eeff),
               )
             ]),
         child: Center(
@@ -294,14 +294,14 @@ class _regenmode extends State<regenmode> {
                                 topRight: Radius.elliptical(100, 100),
                                 bottomRight: Radius.elliptical(100, 100)),
                             border: Border.all(
-                              color: Color(0xffff6600), //Color(0xff38eeff),
-                              width: 3,
+                              color: Color(0xffF0FFFF), //Color(0xff38eeff),        //internal border gauge container
+                              width: 2,
                             ),
                             boxShadow: [
                               BoxShadow(
-                                blurRadius: 3,
-                                spreadRadius: 3,
-                                color: Color(0xffff6600), //Color(0xff38eeff),
+                                blurRadius: 11,
+                                spreadRadius: 11,
+                                color: Colors.black26, //Color(0xff38eeff),
                               )
                             ]),
                         //boxdecoration end
