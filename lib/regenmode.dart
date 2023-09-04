@@ -56,7 +56,7 @@ class _regenmode extends State<regenmode> {
         width: 1024,
         decoration: BoxDecoration(
             color: Color(
-                0xffffdbac), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),
+                0xffffdbac), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),0xffffdbac
             borderRadius: BorderRadius.only(
                 topLeft: Radius.elliptical(0, 0),
                 bottomLeft: Radius.elliptical(0, 0),
@@ -253,15 +253,17 @@ class _regenmode extends State<regenmode> {
                     padding: const EdgeInsets.all(0.0),
                     child: InkWell(
                       onTap: () {
+                        currentScreenIndex=4;
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => powermode()));
+                                builder: (context) => menubar()));
                       },
                       child: SizedBox(
                         height: 300,
                         child: IconButton(
                           onPressed: () {
+                            currentScreenIndex=2;
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -342,6 +344,7 @@ class _regenmode extends State<regenmode> {
                                         color: Colors.orange,
                                         startWidth: 5,
                                         endWidth: 5,
+
                                       ),
                                       GaugeRange(
                                         startValue: 100,
@@ -602,6 +605,7 @@ class _regenmode extends State<regenmode> {
                             children: [
                               IconButton(
                                 onPressed: () {
+                                  currentScreenIndex=4;
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

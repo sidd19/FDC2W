@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:libserialport/libserialport.dart';
+import 'dart:io' ;
 import 'dart:typed_data';
+import 'package:path_provider/path_provider.dart';
 
 //variables for signals
 
+String frame='';
 double value=0;
 double speed=0;
 double rpm=0;
@@ -28,6 +30,7 @@ double playbackProgress = 1.0;
 //List <double> values=[14,12,13,14,15,16,12,13,14,15,16,18,20,24,26,34,46,14,12,30,32];
 int i=0;
 int j=0;
+String move='1';//it is used to switch between the pages
 
 //These variables will store data of the frame
 /*Variables that ends with character D are directly take substring data that broke down from the lines
@@ -71,7 +74,8 @@ double b = 0;
 String c = '';
 String avgspeed = '';
 String avgspeeddata = '';
-
+int currentScreenIndex=1;
+int page=1 ;
 
 
 /*The get gauge color function will return the color
@@ -131,7 +135,55 @@ Color battery_color(){
 
 }
 
+//counter storage clss load the file in the applcation and read function inside it is used tro read the data from the file
+class CounterStorage {
+  Future<String> get _localPath async {
+    final directory = await getApplicationCacheDirectory();
+    return directory.path;
+  }
 
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('textnotes/gaugedata.txt'); // Corrected the path
+  }
+
+  Future<String> readCounter() async {
+    try {
+      final fileContents = await _localFile;
+
+
+
+      return  await fileContents.readAsString();
+
+    } catch (e) {
+      // Provide more specific error handling or logging.
+      print('Error reading the counter: $e');
+      return '0';
+    }
+  }
+
+  Future<File> writeCounter(int counter) async {
+    final file = await _localFile;
+    return file.writeAsString('$counter');
+  }
+}
+
+//end of initialization of thE Class
+
+
+/*functions to blink the indicators*/
+
+void indicator_Blinker()
+{
+  left = !left;
+  right = !right;
+  hazard = !hazard;
+  malfunction = !malfunction;
+  highbeam = !highbeam;
+  side_stand = !side_stand;
+  parking_mode = !parking_mode;
+  parking_brake = !parking_brake;
+}
 
 
 

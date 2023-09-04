@@ -2,6 +2,7 @@
 import 'dart:io'; //for input /output file operations
 import 'dart:async'; //for asyncronous or timer related functions
 import 'package:flutter/material.dart'; //all the ui related widgets
+import 'package:flutter_homescreen/general_settings.dart';
 //user defined files
 import 'package:flutter_homescreen/variables_func.dart';
 import 'package:flutter_homescreen/regenmode.dart';
@@ -17,14 +18,15 @@ import 'package:flutter/services.dart' show rootBundle;
 
 // external added package files
 
-import 'package:libserialport/libserialport.dart';
+
 import 'dart:typed_data';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:dart_periphery/dart_periphery.dart';
+
 
 //end of external added package files
+import 'package:path_provider/path_provider.dart';
 
 
 //main function
@@ -57,24 +59,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+
+
+
 class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   String _date = '';
   String _currentTime = '';
+  final counterStorage = CounterStorage();//we are creating the object for the counter storage class
 
-  //print('Available Port: $availablePort');
 
   @override
 
-  //uart code part
-
-  //port.openReadWrite();
-
-  //uart logic end
 
   // Initialize the gauge values
   //this function is used to update the time
@@ -109,21 +111,15 @@ class _MyHomePageState extends State<MyHomePage> {
       timer = Timer.periodic(Duration(milliseconds: 1000), (_) {
         setState(() {
           if (i <= 6) {
-            //serial();
+
             i = i + 1;
           } else {
             timer?.cancel();
           }
 
           if (j <= 6) {
-            left = !left;
-            right = !right;
-            hazard = !hazard;
-            malfunction = !malfunction;
-            highbeam = !highbeam;
-            side_stand = !side_stand;
-            parking_mode = !parking_mode;
-            parking_brake = !parking_brake;
+            indicator_Blinker();
+
             j = j + 1;
           } else {
             timer?.cancel();
@@ -142,6 +138,11 @@ class _MyHomePageState extends State<MyHomePage> {
     if (timer1 == null) {
       timer1 = Timer.periodic(Duration(milliseconds: 1000), (_) {
         setState(() {
+          /*The choose screen function will switch the screen to left or right
+           according to the input frame keyip it will manage the current state and store the index of the screen*/
+           choose_screen();
+
+         /*This will brake the frames and split the frame in to substring to pass the value to all variable*/
           loadGaugeValues();
         });
       });
@@ -154,30 +155,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> loadGaugeValues() async {
     try {
-      String fileContents =
-          await rootBundle.loadString('textnotes/gaugedata.txt');
 
-      List<String> lines = fileContents.split('\n');
+          counterStorage.readCounter().then((value){ frame=value;
+            print(frame);
+          });
+              
 
-      List<String> values = [];
-      List<String> svalues = [];
-      for (String line in lines) {
+          List<String> lines = frame.toString().split('\n');
+
+           List<String> values = [];
+           List<String> svalues = [];
+           for (String line in lines) {
         //await Future.delayed(const Duration(milliseconds: 1000));
         setState(() {
           // b=gaugeValues .elementAt(i);
           //c=(b/10)*1000;
+
           speedr = speedD;
           odometerr = odometerD;
           leftIndicatorr = leftIndicatorD;
 
           rightIndicatorr = rightIndicatorD;
           headLampr = headLampD;
+          move=KeyIPD;
+
           Future.delayed(Duration(milliseconds:500), () {
             leftIndicatorr == '1' ? left = !left : left = false;
             rightIndicatorr == '1' ? right = !right : right = false;
           });
 
         });
+
+
+
+
 
         String? value = line;
 
@@ -210,6 +221,10 @@ class _MyHomePageState extends State<MyHomePage> {
           print('assistD status is $assistD');
           KeyIPD = line.substring(35, 36);
           print('keyIPD status is $KeyIPD');
+
+
+
+
         } else {
           if (line.isNotEmpty) {
             print('data frame is incorrect');
@@ -692,11 +707,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Icon(Icons.call,
-                                          size: 40, color: Color(0xff323232)),
+                                      Stack(
+                                        children: [
+                                              Container(
+                                                alignment:Alignment.topLeft,
+                                                height:40,width:80,
+                                                child: Icon(Icons.call,
+                                                size: 40, color: Color(0xff323232)),
+                                              ),
+
+                                              Positioned(left:20,child: Text("jai calling")),
+                                            ],
+                                      ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 55.0),
+                                            const EdgeInsets.only(left: 15.0),
                                         child: Icon(Icons.message,
                                             size: 40, color: Color(0xff323232)),
                                       ),
@@ -862,6 +887,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               IconButton(
                                 onPressed: () {
+                                  currentScreenIndex=2;
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -967,4 +993,158 @@ class _MyHomePageState extends State<MyHomePage> {
       )),
     );
   }
+
+
+
+  //page changes
+
+  void choose_screen()
+  {
+    if(currentScreenIndex==1)
+    {
+      if(move=='2')
+      {
+        currentScreenIndex=4;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>menubar()));
+
+      }
+      else if(move=='3')
+      {
+        currentScreenIndex=2;
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
+
+      }
+      else{
+        currentScreenIndex=currentScreenIndex;
+        move='4';
+      }
+    }
+
+    //////////////////////////////////////////////
+
+    else if(currentScreenIndex==2)
+    {
+      if(move=='2')
+      {
+        currentScreenIndex=1;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>MyHomePage()));
+
+      }
+      else if(move=='3')
+      {
+        currentScreenIndex=3;
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>regenmode()));
+
+      }
+
+      else{
+        currentScreenIndex=currentScreenIndex;
+        move='4';
+      }
+    }
+
+    /////////////////////////////////
+
+    else if(currentScreenIndex==3)
+    {
+      if(move=='2')
+      {
+        currentScreenIndex=2;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
+
+      }
+      else if(move=='3')
+      {
+        currentScreenIndex=4;
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>menubar()));
+
+      }
+
+      else{
+        currentScreenIndex=currentScreenIndex;
+        move='4';
+      }
+    }
+
+    /////////////////////////////////
+
+    else if(currentScreenIndex==4)
+    {
+      if(move=='2')
+      {
+        currentScreenIndex=3;
+        //Navigator.pushNamed(context, '/Second');
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>regenmode()));
+
+      }
+      else if(move=='3')
+      {
+        currentScreenIndex=1;
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>MyHomePage()));
+
+      }
+
+      else{
+        currentScreenIndex=currentScreenIndex;
+        move='4';
+
+
+
+      }
+    }
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////
 }
