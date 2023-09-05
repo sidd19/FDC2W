@@ -13,7 +13,7 @@ import 'package:flutter_homescreen/parkingmode.dart';
 import 'package:flutter_homescreen/menubar.dart';
 import 'package:flutter_homescreen/splashscreen.dart';
 import 'package:flutter_homescreen/sound.dart';
-import '//package:flutter/services.dart' show rootBundle;
+//import 'package:flutter/services.dart' show rootBundle;
 
 //end of user defined files
 
