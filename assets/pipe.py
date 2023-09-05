@@ -1,6 +1,6 @@
 import os, time
 
-pipe_name = '/home/srg/Sarthak/Flutter_Projects/flutter_homescreen/textnotes/pipe_test'
+pipe_name = '/home/srg/Documents/flutter_homescreen2/assets/pipe_test'
 
 def child():
     pipein = os.open(pipe_name, os.O_RDONLY)

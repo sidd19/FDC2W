@@ -51,8 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> loadGaugeValues() async {
     try {
+
+
       final pipePath =
-          'textnotes/pipe_test'; // Replace with the actual path to your named pipe
+          'assets/pipe_test'; // Replace with the actual path to your named pipe
 
       // Open the named pipe for reading
 
