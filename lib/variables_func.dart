@@ -37,17 +37,17 @@ String move='1';//it is used to switch between the pages
 Variables that ends with r character are actual variable in which i am passing to the ui variables
  */
 
-String fuelLevelD = 'N/A';
+String fuelLevelD = '0';
 String fuelLevelr='0';
-String rpmD = 'N/A';
+String rpmD = '0';
 String rpmr='0';
-String speedD = 'N/A';
+String speedD = '0';
 String speedr='0';
-String odometerD = 'N/A';
+String odometerD = '0';
 String odometerr='0';
-String headLampD = 'N/A';
+String headLampD = '0';
 String headLampr='0';
-String gearD = 'N/A';
+String gearD = '0';
 String gearr='0';
 String leftIndicatorD = 'N/A';
 String leftIndicatorr='0';

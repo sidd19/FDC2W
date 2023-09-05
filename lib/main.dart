@@ -1,6 +1,7 @@
 //importing all the required package
 import 'dart:io'; //for input /output file operations
 import 'dart:async'; //for asyncronous or timer related functions
+import 'dart:convert';
 import 'package:flutter/material.dart'; //all the ui related widgets
 import 'package:flutter_homescreen/general_settings.dart';
 //user defined files
@@ -12,7 +13,7 @@ import 'package:flutter_homescreen/parkingmode.dart';
 import 'package:flutter_homescreen/menubar.dart';
 import 'package:flutter_homescreen/splashscreen.dart';
 import 'package:flutter_homescreen/sound.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import '//package:flutter/services.dart' show rootBundle;
 
 //end of user defined files
 
@@ -26,7 +27,7 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 
 //end of external added package files
-import 'package:path_provider/path_provider.dart';
+//import 'package:path_provider/path_provider.dart';
 
 
 //main function
@@ -154,20 +155,22 @@ class _MyHomePageState extends State<MyHomePage> {
   //function to read data from a file that is stored in assets
 
   Future<void> loadGaugeValues() async {
+
+    final file = File('textnotes/gaugedata.txt');
+    Stream<String> data_lines = file.openRead()
+        .transform(utf8.decoder)       // Decode bytes to UTF-8.
+        .transform(LineSplitter());
     try {
 
-          counterStorage.readCounter().then((value){ frame=value;
-            print(frame);
-          });
+          // counterStorage.readCounter().then((value){ frame=value;
+          //   print(frame);
+          // });
 
 
+        await for (var line in data_lines) {
+        print('$line');
 
-          List<String> lines = frame.toString().split('\n');
 
-           List<String> values = [];
-           List<String> svalues = [];
-           for (String line in lines) {
-        //await Future.delayed(const Duration(milliseconds: 1000));
         setState(() {
           // b=gaugeValues .elementAt(i);
           //c=(b/10)*1000;
@@ -230,17 +233,95 @@ class _MyHomePageState extends State<MyHomePage> {
           if (line.isNotEmpty) {
             print('data frame is incorrect');
           } else {
-            line = lines.last;
+
           }
-          String? svalue = value.toString();
-          if (value != null) {
-            values.add(value);
-            svalues.add(svalue);
-          }
+
         }
 
-        // });
-      }
+          // });
+        }
+
+
+
+         // List<String> lines = frame.toString().split('\n');
+
+           List<String> values = [];
+           List<String> svalues = [];
+      //      for (String line in lines) {
+      //   //await Future.delayed(const Duration(milliseconds: 1000));
+      //   setState(() {
+      //     // b=gaugeValues .elementAt(i);
+      //     //c=(b/10)*1000;
+      //
+      //     speedr = speedD;
+      //     odometerr = odometerD;
+      //     leftIndicatorr = leftIndicatorD;
+      //
+      //     rightIndicatorr = rightIndicatorD;
+      //     headLampr = headLampD;
+      //     move=KeyIPD;
+      //
+      //     Future.delayed(Duration(milliseconds:500), () {
+      //       leftIndicatorr == '1' ? left = !left : left = false;
+      //       rightIndicatorr == '1' ? right = !right : right = false;
+      //     });
+      //
+      //   });
+      //
+      //
+      //
+      //
+      //
+      //   String? value = line;
+      //
+      //   if (line.isNotEmpty && line.startsWith('*E') && line.endsWith('K#')) {
+      //     rpmD = line.substring(2, 7);
+      //     print('rpm is $rpmD');
+      //     speedD = line.substring(8, 11);
+      //
+      //     print('speed is $speedD');
+      //     fuelLevelD = line.substring(12, 13);
+      //     print('fuel level is $fuelLevelD');
+      //
+      //     odometerD = line.substring(14, 20);
+      //     print('odo meter rating is $odometerD');
+      //     headLampD = line.substring(21, 22);
+      //     print('headlamp status is $headLampD');
+      //     gearD = line.substring(23, 24);
+      //     print('gear status is $gearD');
+      //     leftIndicatorD = line.substring(25, 26);
+      //     print('left indicator status is $leftIndicatorD');
+      //     rightIndicatorD = line.substring(27, 28);
+      //     print('right indicator status is $rightIndicatorD');
+      //     modeD = line.substring(29, 30);
+      //     print('mode status is $rightIndicatorD');
+      //     serviceD = line.substring(31, 32);
+      //     print('serviceD status is $serviceD');
+      //     batteryD = line.substring(32, 34);
+      //     print('batteryD status is $batteryD');
+      //     assistD = line.substring(34, 35);
+      //     print('assistD status is $assistD');
+      //     KeyIPD = line.substring(35, 36);
+      //     print('keyIPD status is $KeyIPD');
+      //
+      //
+      //
+      //
+      //   } else {
+      //     if (line.isNotEmpty) {
+      //       print('data frame is incorrect');
+      //     } else {
+      //       line = lines.last;
+      //     }
+      //     String? svalue = value.toString();
+      //     if (value != null) {
+      //       values.add(value);
+      //       svalues.add(svalue);
+      //     }
+      //   }
+      //
+      //   // });
+      // }
     } catch (e) {
       print('Error loading gauge values: $e');
     }
