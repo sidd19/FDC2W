@@ -55,22 +55,22 @@ class _regenmode extends State<regenmode> {
         height: 600,
         width: 1024,
         decoration: BoxDecoration(
-            color: Color(
-                0xffffdbac), //Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),0xffffdbac
+            color: Color(0xffF0FFFF),//Colors.black,//Color(0Xff323232),//Color(0Xff7FFFD4),0xffffdbac
             borderRadius: BorderRadius.only(
                 topLeft: Radius.elliptical(0, 0),
                 bottomLeft: Radius.elliptical(0, 0),
                 topRight: Radius.elliptical(0, 0),
                 bottomRight: Radius.elliptical(0, 0)),
             border: Border.all(
-              color: Colors.white, //Color(0xffff6600),//Color(0xff38eeff),
-              width: 3,
+              color:Color(0xffF0FFFF),
+              width:2, //Color(0xffff6600),//Color(0xff38eeff),
+
             ),
             boxShadow: [
               BoxShadow(
-                blurRadius: 11,
-                spreadRadius: 11,
-                color: Colors.white, //Color(0xffff6600),//Color(0xff38eeff),
+                blurRadius:11,
+                spreadRadius:11,
+                color:Colors.black26, //Color(0xffff6600),//Color(0xff38eeff),
               )
             ]),
         child: Center(
@@ -151,96 +151,96 @@ class _regenmode extends State<regenmode> {
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: parking_mode == true
                             ? Image.asset(
                                 'assets/images/parkingcolor.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/parking.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50.0, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: headLampr == '1'
                             ? Image.asset(
                                 'assets/images/high-beam_blue.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/high-beam.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50.0, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: hazard == true
                             ? Image.asset(
                                 'assets/images/colorhazardbg.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/hazard.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: malfunction == true
                             ? Image.asset(
                                 'assets/images/low-beam_green.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/low-beam.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: side_stand == true
                             ? Image.asset(
                                 'assets/images/colorside_standbg.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/side_stand.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: parking_brake == true
                             ? Image.asset(
                                 'assets/images/parkingBrakecolor.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/parkingBrake.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
@@ -294,15 +294,19 @@ class _regenmode extends State<regenmode> {
                                 topRight: Radius.elliptical(100, 100),
                                 bottomRight: Radius.elliptical(100, 100)),
                             border: Border.all(
-                              color: Color(0xffff6600), //Color(0xff38eeff),
-                              width: 3,
+
+                                  color:Color(0xffF0FFFF),
+                                  width:2, //Color(0xff38eeff),
+
                             ),
                             boxShadow: [
-                              BoxShadow(
-                                blurRadius: 3,
-                                spreadRadius: 3,
-                                color: Color(0xffff6600), //Color(0xff38eeff),
-                              )
+
+                          BoxShadow(
+                          blurRadius:11,
+                          spreadRadius:11,
+                          color:Colors.black26,
+                        ) //Color(0xff38eeff),
+
                             ]),
                         //boxdecoration end
 
@@ -348,7 +352,7 @@ class _regenmode extends State<regenmode> {
                                       ),
                                       GaugeRange(
                                         startValue: 100,
-                                        endValue: 120,
+                                        endValue: 140,
                                         color: Colors.orange,
                                         startWidth: 5,
                                         endWidth: 5,
@@ -374,13 +378,13 @@ class _regenmode extends State<regenmode> {
                                         animationType: AnimationType.ease,
                                       ),
                                       RangePointer(
-                                        value: double.tryParse(speedr) ?? 0,
+                                        value: double.tryParse(speedr)!>=140?140:double.tryParse(speedr)!,
                                         width: 35,
                                         color: get_guage_color(),
                                         pointerOffset: 5,
                                       ),
                                       MarkerPointer(
-                                        value: value,
+                                        value: double.tryParse(speedr)!>=140?140:double.tryParse(speedr)!,
                                         markerOffset: 3,
                                         markerWidth: 5,
                                         markerHeight: 35,

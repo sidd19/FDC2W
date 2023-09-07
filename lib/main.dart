@@ -73,7 +73,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _date = '';
   String _currentTime = '';
-  final counterStorage = CounterStorage();//we are creating the object for the counter storage class
+  //final counterStorage = CounterStorage();//we are creating the object for the counter storage class
 
 
   @override
@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //updare_value:This function is used to update the value of the gauge by taking input from the list
   double update_value() {
     if (timer1 == null) {
-      timer1 = Timer.periodic(Duration(milliseconds:75), (_) {
+      timer1 = Timer.periodic(Duration(milliseconds:100), (_) {
         setState(() {
           /*The choose screen function will switch the screen to left or right
            according to the input frame keyip it will manage the current state and store the index of the screen*/
@@ -161,8 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
           //   print(frame);
           // });
 
-           httpdata=await http.read(Uri.http('127.0.1:8081', 'received_data.txt'));
-
+           httpdata=await http.read(Uri.http('127.0.0.1:8081',''));
+            print(httpdata);
 
 
 
@@ -176,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
            List<String> values = [];
            List<String> svalues = [];
            for (String line in lines) {
-        //await Future.delayed(const Duration(milliseconds: 1000));
+    //    await Future.delayed(const Duration(milliseconds: 1));
         setState(() {
           // b=gaugeValues .elementAt(i);
           //c=(b/10)*1000;
@@ -439,7 +439,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         )
                       : Image.asset(
                           'assets/images/right.png',
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                 ],
               ),
@@ -453,96 +453,96 @@ class _MyHomePageState extends State<MyHomePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,  //actual size was 40 height width for all indicators
+                        width: 50,
                         child: parking_mode == true
                             ? Image.asset(
                                 'assets/images/parkingcolor.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/parking.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50.0, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: headlamp == true
                             ? Image.asset(
                                 'assets/images/high-beam_blue.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/high-beam.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50.0, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: hazard == true
                             ? Image.asset(
                                 'assets/images/colorhazardbg.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/hazard.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: malfunction == true
                             ? Image.asset(
                                 'assets/images/low-beam_green.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/low-beam.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: side_stand == true
                             ? Image.asset(
                                 'assets/images/colorside_standbg.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/side_stand.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: parking_brake == true
                             ? Image.asset(
                                 'assets/images/parkingBrakecolor.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/parkingBrake.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                         //child:side_stand==true?Image.asset('assets/images/colorside_standbg.png',fit:BoxFit.fill,):Image.asset('assets/images/side_stand.png',fit:BoxFit.fill,),
                       ),
@@ -616,7 +616,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                       GaugeRange(
                                         startValue: 70,
-                                        endValue: 100,
+                                        endValue: 140,
                                         color: Colors.orange,
                                         startWidth: 5,
                                         endWidth: 5,
@@ -655,13 +655,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                         animationType: AnimationType.ease,
                                       ),
                                       RangePointer(
-                                        value: double.tryParse(speedr) ?? 0,
+                                        value: double.tryParse(speedr)!>=140?140:double.tryParse(speedr)!,
                                         width: 35,
                                         color: get_guage_color(),
                                         pointerOffset: 5,
                                       ),
                                       MarkerPointer(
-                                        value: double.tryParse(speedr) ?? 0,
+                                        value: double.tryParse(speedr)!>=140?140:double.tryParse(speedr)!,
                                         markerOffset: 3,
                                         markerWidth: 5,
                                         markerHeight: 35,

@@ -152,96 +152,96 @@ class _powermode extends State<powermode> {
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: parking_mode == true
                             ? Image.asset(
                                 'assets/images/parkingcolor.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/parking.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50.0, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: headLampr == '1'
                             ? Image.asset(
                                 'assets/images/high-beam_blue.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/high-beam.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50.0, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: hazard == true
                             ? Image.asset(
                                 'assets/images/colorhazardbg.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/hazard.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: malfunction == true
                             ? Image.asset(
                                 'assets/images/low-beam_green.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/low-beam.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: side_stand == true
                             ? Image.asset(
                                 'assets/images/colorside_standbg.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/side_stand.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 50, top: 10),
                       child: Container(
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         child: parking_brake == true
                             ? Image.asset(
                                 'assets/images/parkingBrakecolor.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/parkingBrake.png',
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                       ),
                     ),
@@ -253,6 +253,7 @@ class _powermode extends State<powermode> {
                   Padding(
                     padding: const EdgeInsets.all(0.0),
                     child: InkWell(
+
                       onTap: () {
                         Navigator.push(
                             context,
@@ -351,7 +352,7 @@ class _powermode extends State<powermode> {
                                       ),
                                       GaugeRange(
                                         startValue: 100,
-                                        endValue: 120,
+                                        endValue: 140,
                                         color: Colors.orange,
                                         startWidth: 5,
                                         endWidth: 5,
@@ -377,13 +378,13 @@ class _powermode extends State<powermode> {
                                         animationType: AnimationType.ease,
                                       ),
                                       RangePointer(
-                                        value: double.tryParse(speedr) ?? 0,
+                                        value: double.tryParse(speedr)!>=140?140:double.tryParse(speedr)!,
                                         width: 35,
                                         color: get_guage_color(),
                                         pointerOffset: 5,
                                       ),
                                       MarkerPointer(
-                                        value: value,
+                                        value: double.tryParse(speedr)!>=140?140:double.tryParse(speedr)!,
                                         markerOffset: 3,
                                         markerWidth: 5,
                                         markerHeight: 35,

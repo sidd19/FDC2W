@@ -83,21 +83,21 @@ int page=1 ;
 * of the gauge according to the incoming value*/
 Color get_guage_color(){
 
-  if (value <=40)
+  if (double.tryParse(speedr)!<=40 )
   {
 
     return Colors.green;
 
   }
 
-  else if (value <= 70)
+  else if (double.tryParse(speedr)!<=80)
   {
 
     return Colors.blue;
 
   }
 
-  else if (value <= 100)
+  else if (double.tryParse(speedr)!<=140)
   {
 
     return Colors.red;
@@ -136,40 +136,9 @@ Color battery_color(){
 
 }
 
-//counter storage clss load the file in the applcation and read function inside it is used tro read the data from the file
-class CounterStorage {
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('textnotes/gaugedata.txt'); // Corrected the path
-  }
-
-  Future<String> readCounter() async {
-    try {
-      final fileContents = await _localFile;
 
 
 
-      return  await fileContents.readAsString();
-
-    } catch (e) {
-      // Provide more specific error handling or logging.
-      print('Error reading the counter: $e');
-      return '0';
-    }
-  }
-
-  Future<File> writeCounter(int counter) async {
-    final file = await _localFile;
-    return file.writeAsString('$counter');
-  }
-}
-
-//end of initialization of thE Class
 
 
 /*functions to blink the indicators*/
@@ -184,6 +153,7 @@ void indicator_Blinker()
   side_stand = !side_stand;
   parking_mode = !parking_mode;
   parking_brake = !parking_brake;
+  headlamp=!headlamp;
 }
 
 
