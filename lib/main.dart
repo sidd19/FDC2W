@@ -14,7 +14,7 @@ import 'package:flutter_homescreen/splashscreen.dart';
 import 'package:flutter_homescreen/sound.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http; //server package
-
+import 'package:thread/thread.dart';
 //end of user defined files
 
 // external added package files
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
       //Setting the pages routes
       routes: {
         '/': (context) => splash_screen(), //MyHomePage(),
+        '/first':(context)=>MyHomePage(),
         '/second': (context) => powermode(),
         '/third': (context) => regenmode(),
         '/fourth': (context) => parkingmode(),
@@ -124,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
             j = j + 1;
           } else {
             timer?.cancel();
-            print("timer one is stopped");
+            //print("timer one is stopped");
             Future.delayed(Duration(seconds: 1), () {
               update_value();
             });
@@ -137,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //updare_value:This function is used to update the value of the gauge by taking input from the list
   double update_value() {
     if (timer1 == null) {
-      timer1 = Timer.periodic(Duration(milliseconds:100), (_) {
+      timer1 = Timer.periodic(Duration(milliseconds:50), (_) {
         setState(() {
           /*The choose screen function will switch the screen to left or right
            according to the input frame keyip it will manage the current state and store the index of the screen*/
@@ -157,13 +158,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> loadGaugeValues() async {
     try {
 
-          // counterStorage.readCounter().then((value){ frame=value;
-          //   print(frame);
-          // });
-
-           httpdata=await http.read(Uri.http('127.0.0.1:2001',''));
-            print(httpdata);
-
 
 
 
@@ -171,28 +165,49 @@ class _MyHomePageState extends State<MyHomePage> {
 
               
 
-          List<String> lines = httpdata.toString().split('\n');
+          List<String> lines = rawdata.toString().split('\n');
 
            List<String> values = [];
            List<String> svalues = [];
            for (String line in lines) {
     //    await Future.delayed(const Duration(milliseconds: 1));
         setState(() {
-          // b=gaugeValues .elementAt(i);
-          //c=(b/10)*1000;
 
           speedr = speedD;
           odometerr = odometerD;
+
+          fuelLevelr=int.tryParse(fuelLevelD) ?? 0;
+          if(fuelLevelr>0 && fuelLevelr <=9)
+            {
+              fuelvalue=fuelLevelr/10 ;
+            }
+          else{
+              fuelvalue=0;
+          }
+
+          gearr=gearD ;
+          rpmr=rpmD ;
+          serviceDr=serviceD ;
+          hazardr=hazardD ;
           leftIndicatorr = leftIndicatorD;
+          move=KeyIPD ;
 
           rightIndicatorr = rightIndicatorD;
+          parkingr=parkingD;
           headLampr = headLampD;
           move=KeyIPD;
+          modeDr=modeD;
+          highbeamr=highbeamD;
+          sidestandDr=sidestandD;
 
-
+            switch_mode();//this will change the screen according to the mode input
             leftIndicatorr == '1' ? left = true : left = false;
             rightIndicatorr == '1' ? right = true : right = false;
             headLampr == '1' ? headlamp = true : headlamp = false;
+            highbeamr=='1' ? highbeam=true : highbeam =false ;
+            sidestandDr=='1'? side_stand=true: side_stand=false ;
+            hazardr=='1'?  hazard=true:hazard=false ;
+            parkingr=='1'? parking_mode=true:parking_mode=false ;
 
 
         });
@@ -205,33 +220,46 @@ class _MyHomePageState extends State<MyHomePage> {
 
         if (line.isNotEmpty && line.startsWith('*E') && line.endsWith('K#')) {
           rpmD = line.substring(2, 7);
-          print('rpm is $rpmD');
+         // print('rpm is $rpmD');
           speedD = line.substring(8, 11);
 
-          print('speed is $speedD');
+         // print('speed is $speedD');
           fuelLevelD = line.substring(12, 13);
-          print('fuel level is $fuelLevelD');
+          //print('fuel level is $fuelLevelD');
 
           odometerD = line.substring(14, 20);
-          print('odo meter rating is $odometerD');
+          //print('odo meter rating is $odometerD');
           headLampD = line.substring(21, 22);
-          print('headlamp status is $headLampD');
-          gearD = line.substring(23, 24);
-          print('gear status is $gearD');
+         // print('headlamp status is $headLampD');
+          gearD = line.substring(23, 24)??"N";
+         // print('gear status is $gearD');
           leftIndicatorD = line.substring(25, 26);
-          print('left indicator status is $leftIndicatorD');
+         // print('left indicator status is $leftIndicatorD');
           rightIndicatorD = line.substring(27, 28);
-          print('right indicator status is $rightIndicatorD');
+          //print('right indicator status is $rightIndicatorD');
           modeD = line.substring(29, 30);
-          print('mode status is $rightIndicatorD');
+         // print('mode status is $rightIndicatorD');
           serviceD = line.substring(31, 32);
-          print('serviceD status is $serviceD');
+         // print('serviceD status is $serviceD');
           batteryD = line.substring(32, 34);
-          print('batteryD status is $batteryD');
+         // print('batteryD status is $batteryD');
           assistD = line.substring(34, 35);
-          print('assistD status is $assistD');
+         // print('assistD status is $assistD');
           KeyIPD = line.substring(35, 36);
-          print('keyIPD status is $KeyIPD');
+         // print('keyIPD status is $KeyIPD');
+         //  highbeamD=line.substring(37,38);
+         //
+         //  //additional frame
+         // // print('highbeam status is $highbeamD');
+         //  sidestandD=line.substring(39,40);
+         //  hazardD= line.substring(41,42);
+         //  parkingD=line.substring(43,44);
+
+
+
+
+
+
 
 
 
@@ -265,9 +293,12 @@ class _MyHomePageState extends State<MyHomePage> {
 //this part of code will execute the part of code written inside it at the starting of building of the ui
   //List<String> availablePort = SerialPort.availablePorts;
   @override
-  void initState() {
+   initState()   {
     super.initState();
 
+   //thread.start();
+
+    mythreadfunc();
     indicator();
     //update_value();
   }
@@ -284,68 +315,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  //_show dynamic popup:used to show menu bar
 
-  void _showDynamicPopup(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 100,
-            width: 1000,
-            color: Colors.yellow,
-            padding: EdgeInsets.only(bottom: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                //Power Mode elevated button
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // Close the popup
-                    Navigator.pushNamed(
-                        context, '/second'); // Navigate to the second screen
-                  },
-                  child: Text('Power mode'),
-                ),
-
-                //Regen Mode elevated button
-
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // Close the popup
-                    Navigator.pushNamed(context, '/third');
-                  },
-                  child: Text('Regen Mode'),
-                ),
-
-                //Parking Mode elevated button
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // Close the popup
-                    Navigator.pushNamed(context, '/fourth');
-                  },
-                  child: Text('Parking Mode'),
-                ),
-
-                //Menu Bar elevated button
-
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // Close the popup
-                    Navigator.pushNamed(context, '/fifth');
-                  },
-                  child: Text('Menu Bar'),
-                ),
-              ],
-            ),
-          ),
-        );
-      }, //builder
-    ); //show model bottom sheet
-  } //show dynamic pop up
 
   //End of pop function
 
@@ -471,7 +441,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: headlamp == true
+                        child: highbeam == true
                             ? Image.asset(
                                 'assets/images/high-beam_blue.png',
                                 fit: BoxFit.cover,
@@ -503,7 +473,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: malfunction == true
+                        child: headlamp == true
                             ? Image.asset(
                                 'assets/images/low-beam_green.png',
                                 fit: BoxFit.cover,
@@ -531,19 +501,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 50, top: 10),
+                      padding: const EdgeInsets.only(left: 50, top: 0),
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: parking_brake == true
-                            ? Image.asset(
-                                'assets/images/parkingBrakecolor.png',
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                'assets/images/parkingBrake.png',
-                                fit: BoxFit.cover,
-                              ),
+                        child: Text(
+                          "$gearr",
+                          style: GoogleFonts.roboto(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                         //child:side_stand==true?Image.asset('assets/images/colorside_standbg.png',fit:BoxFit.fill,):Image.asset('assets/images/side_stand.png',fit:BoxFit.fill,),
                       ),
                     ),
@@ -728,7 +697,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 size: 40, color: Color(0xff323232)),
                                               ),
 
-                                              Positioned(left:20,child: Text("jai calling")),
+                                              Positioned(left:20,child: Text("")),
                                             ],
                                       ),
                                       Padding(
@@ -829,7 +798,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   right: 160,
                                                 ),
                                                 child: Text(
-                                                  "DTE 100km",
+                                                  "DTE${fuelvalue*600}km",
                                                   style: TextStyle(
                                                       fontSize: 24,
                                                       fontWeight:
@@ -840,7 +809,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               Container(
                                                 height: 50,
                                                 child: LinearProgressIndicator(
-                                                  value: 0.42,
+                                                  value:fuelvalue ,///
                                                   valueColor:
                                                       AlwaysStoppedAnimation(
                                                           Color(0xffFCD12A)),
@@ -858,7 +827,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             decoration: const BoxDecoration(
                                               image: DecorationImage(
                                                 image: ExactAssetImage(
-                                                    'assets/images/battery_charge.png'),
+                                                    'assets/images/fuel-icon2.png'),
                                                 fit: BoxFit.fill,
                                               ),
                                             )),
@@ -866,9 +835,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                       Padding(
                                         padding: const EdgeInsets.only(top: 20),
                                         child: Text(
-                                          "50%",
+                                            "${fuelvalue*100}0%" ,
                                           style: TextStyle(
-                                              fontSize: 25,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87),
                                         ),
@@ -887,10 +856,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.only(left: 0.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => powermode()));
+                        currentScreenIndex=2;
+                        Navigator.of(context).pushReplacementNamed('/second');
                       },
                       child: SizedBox(
                           height: 300,
@@ -900,10 +867,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               IconButton(
                                 onPressed: () {
                                   currentScreenIndex=2;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => powermode()));
+                                  //Navigator.of(context).pushReplacementNamed('/second');
+                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
                                 },
                                 icon: Icon(
                                   Icons.keyboard_double_arrow_right,
@@ -978,7 +943,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           Text(
-                            "Trip 293.8km",
+
+                            "Rpm $rpmr" ,
+
                             style: GoogleFonts.roboto(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -986,7 +953,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           Text(
-                            "TPMS",
+                            "Service $serviceDr",
                             style: GoogleFonts.roboto(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -1009,11 +976,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   //page changes
-
+int switch_screen_lock=0;
   void choose_screen()
   {
-    if(currentScreenIndex==1)
+    if(currentScreenIndex==1 && last_mode!=1)
     {
+      last_mode=1;
       if(move=='2')
       {
         currentScreenIndex=4;
@@ -1035,8 +1003,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     //////////////////////////////////////////////
 
-    else if(currentScreenIndex==2)
+    else if(currentScreenIndex==2  && last_mode!=2)
     {
+
+      last_mode=1;
       if(move=='2')
       {
         currentScreenIndex=1;
@@ -1059,8 +1029,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     /////////////////////////////////
 
-    else if(currentScreenIndex==3)
+    else if(currentScreenIndex==3  && last_mode!=3)
     {
+      last_mode=3;
       if(move=='2')
       {
         currentScreenIndex=2;
@@ -1083,8 +1054,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     /////////////////////////////////
 
-    else if(currentScreenIndex==4)
+    else if(currentScreenIndex==4  && last_mode!=4)
     {
+      last_mode=4;
       if(move=='2')
       {
         currentScreenIndex=3;
@@ -1118,7 +1090,43 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
+//mode change function
+void switch_mode()
+{
+  if(modeDr=='1' && last_mode!=1)
+    {
+      currentScreenIndex=1;
+      Navigator.of(context).pushReplacementNamed('/first');
+      last_mode=1;
+    }
+  else if(modeDr=='2' && last_mode!=2 )
+    {
 
+      currentScreenIndex=2;
+      Navigator.of(context).pushReplacementNamed('/second');
+      last_mode=2;
+    }
+  else if(modeDr=='3'  && last_mode!=3)
+    {
+
+      currentScreenIndex=3;
+      Navigator.of(context).pushReplacementNamed('/third');
+      last_mode=3;
+    }
+
+  else{
+    last_mode=0;
+  }
+
+
+
+
+
+
+
+
+
+}
 
 
 

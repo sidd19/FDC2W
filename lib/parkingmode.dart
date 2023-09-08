@@ -1,10 +1,13 @@
 //This dart file is for power mode
 
 import 'package:flutter/material.dart';
+import 'package:flutter_homescreen/variables_func.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_homescreen/menubar.dart';
 import 'package:flutter_homescreen/main.dart';
+import 'package:flutter_homescreen/regenmode.dart';
+
 
 class parkingmode extends StatefulWidget{
 
@@ -31,12 +34,14 @@ class _parkingmode extends State<parkingmode>{
               children: [
 
 
-                InkWell(onTap:(){Navigator.push(context, MaterialPageRoute(builder:(context)=>menubar()));},
+                InkWell(onTap:(){
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>regenmode()));
+                  },
                   child: SizedBox(
                     height:400,
                     child: IconButton(onPressed:(){
 
-                      Navigator.push(context, MaterialPageRoute(builder:(context)=>menubar()));
+                      Navigator.push(context, MaterialPageRoute(builder:(context)=>regenmode()));
                     }, icon:Icon(Icons.keyboard_double_arrow_left,size:80,color:Colors.black26,),),
                   ),
                 ),
@@ -175,11 +180,11 @@ class _parkingmode extends State<parkingmode>{
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
 
-                              Text("Avg speed 100 km/h",style:TextStyle(fontSize:15,fontWeight:FontWeight.bold),),
+                              Text("Avg speed $speedr km/h",style:TextStyle(fontSize:15,fontWeight:FontWeight.bold),),
 
-                              Text("ODO 309.3 km",style:TextStyle(fontSize:15,fontWeight:FontWeight.bold),),
+                              Text("ODO $odometerr km",style:TextStyle(fontSize:15,fontWeight:FontWeight.bold),),
 
-                              Text("Trip 293.8km",style:TextStyle(fontSize:15,fontWeight:FontWeight.bold),)
+                              Text( "Service $serviceDr",style:TextStyle(fontSize:15,fontWeight:FontWeight.bold),)
 
 
                             ],
@@ -196,12 +201,12 @@ class _parkingmode extends State<parkingmode>{
 
                 ),
 
-                InkWell(onTap:(){ Navigator.push(context, MaterialPageRoute(builder:(context)=>MyHomePage()));},
+                InkWell(onTap:(){ Navigator.push(context, MaterialPageRoute(builder:(context)=>menubar()));},
                   child: SizedBox(
                     height:400,
                     child: IconButton(onPressed:(){
 
-                      Navigator.push(context, MaterialPageRoute(builder:(context)=>MyHomePage()));
+                      Navigator.push(context, MaterialPageRoute(builder:(context)=>menubar()));
                     }, icon:Icon(Icons.keyboard_double_arrow_right,size:80,color:Colors.black26,),),
                   ),
                 ),

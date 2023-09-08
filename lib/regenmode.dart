@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_homescreen/parkingmode.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_homescreen/menubar.dart';
@@ -45,7 +46,7 @@ class _regenmode extends State<regenmode> {
   @override
   void initState() {
     super.initState();
-    _updateTime();
+
   }
 
   Widget build(BuildContext context) {
@@ -169,7 +170,7 @@ class _regenmode extends State<regenmode> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: headLampr == '1'
+                        child: highbeam == true
                             ? Image.asset(
                                 'assets/images/high-beam_blue.png',
                                 fit: BoxFit.cover,
@@ -201,7 +202,7 @@ class _regenmode extends State<regenmode> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: malfunction == true
+                        child: headlamp == true
                             ? Image.asset(
                                 'assets/images/low-beam_green.png',
                                 fit: BoxFit.cover,
@@ -229,19 +230,18 @@ class _regenmode extends State<regenmode> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 50, top: 10),
+                      padding: const EdgeInsets.only(left: 50, top: 0),
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: parking_brake == true
-                            ? Image.asset(
-                                'assets/images/parkingBrakecolor.png',
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                'assets/images/parkingBrake.png',
-                                fit: BoxFit.cover,
-                              ),
+                        child: Text(
+                          "$gearr",
+                          style: GoogleFonts.roboto(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -253,21 +253,15 @@ class _regenmode extends State<regenmode> {
                     padding: const EdgeInsets.all(0.0),
                     child: InkWell(
                       onTap: () {
-                        currentScreenIndex=4;
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => menubar()));
+                        currentScreenIndex=2;
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
                       },
                       child: SizedBox(
                         height: 300,
                         child: IconButton(
                           onPressed: () {
                             currentScreenIndex=2;
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => powermode()));
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
                           },
                           icon: Icon(
                             Icons.keyboard_double_arrow_left,
@@ -541,7 +535,7 @@ class _regenmode extends State<regenmode> {
                                                   right: 160,
                                                 ),
                                                 child: Text(
-                                                  "DTE 100km",
+                                                  "DTE${fuelvalue*600}km",
                                                   style: TextStyle(
                                                       fontSize: 24,
                                                       fontWeight:
@@ -552,7 +546,7 @@ class _regenmode extends State<regenmode> {
                                               Container(
                                                 height: 50,
                                                 child: LinearProgressIndicator(
-                                                  value: 0.42,
+                                                  value: fuelvalue,
                                                   valueColor:
                                                       AlwaysStoppedAnimation(
                                                           Color(0xffFCD12A)),
@@ -570,7 +564,7 @@ class _regenmode extends State<regenmode> {
                                             decoration: const BoxDecoration(
                                               image: DecorationImage(
                                                 image: ExactAssetImage(
-                                                    'assets/images/battery_charge.png'),
+                                                    'assets/images/fuel-icon2.png'),
                                                 fit: BoxFit.fill,
                                               ),
                                             )),
@@ -578,9 +572,9 @@ class _regenmode extends State<regenmode> {
                                       Padding(
                                         padding: const EdgeInsets.only(top: 20),
                                         child: Text(
-                                          "50%",
+                                          "${fuelvalue*100}0%" ,
                                           style: TextStyle(
-                                              fontSize: 25,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87),
                                         ),
@@ -599,8 +593,8 @@ class _regenmode extends State<regenmode> {
                     padding: const EdgeInsets.only(left: 0.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => menubar()));
+                        currentScreenIndex=4;
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>parkingmode()));
                       },
                       child: SizedBox(
                           height: 300,
@@ -610,10 +604,7 @@ class _regenmode extends State<regenmode> {
                               IconButton(
                                 onPressed: () {
                                   currentScreenIndex=4;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => menubar()));
+                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>parkingmode()));
                                 },
                                 icon: Icon(
                                   Icons.keyboard_double_arrow_right,
@@ -688,7 +679,7 @@ class _regenmode extends State<regenmode> {
                             ),
                           ),
                           Text(
-                            "Trip 293.8km",
+                            "Rpm $rpmr" ,
                             style: GoogleFonts.roboto(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -696,7 +687,7 @@ class _regenmode extends State<regenmode> {
                             ),
                           ),
                           Text(
-                            "TPMS",
+                            "Service $serviceDr",
                             style: GoogleFonts.roboto(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

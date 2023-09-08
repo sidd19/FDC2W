@@ -1,13 +1,15 @@
 //This dart file is for power mode
 
 import 'package:flutter/material.dart';
+import 'package:flutter_homescreen/main.dart';
 import 'package:flutter_homescreen/variables_func.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_homescreen/general_settings.dart';
 import 'package:flutter_homescreen/regenmode.dart';
 import 'package:flutter_homescreen/parkingmode.dart';
-import 'package:flutter_homescreen/bluetooth.dart';
+//import 'package:flutter_homescreen/bluetooth.dart';
+import 'package:flutter_homescreen/regenmode.dart';
 
 class menubar extends StatefulWidget{
 
@@ -150,7 +152,7 @@ class _menubar  extends State<menubar >{
                         child: ElevatedButton(onPressed:(){
 
 
-                          Navigator.push(context, MaterialPageRoute(builder:(context)=>bluetooth()));
+                         // Navigator.push(context, MaterialPageRoute(builder:(context)=>bluetooth()));
 
 
 
@@ -215,12 +217,12 @@ class _menubar  extends State<menubar >{
 
                 Padding(
                   padding: const EdgeInsets.only(left:0,bottom:10.0),
-                  child: InkWell(onTap:(){ Navigator.push(context, MaterialPageRoute(builder:(context)=>parkingmode()));},
+                  child: InkWell(onTap:(){ Navigator.push(context, MaterialPageRoute(builder:(context)=>MyHomePage()));},
                     child: SizedBox(
                       height:400,
                       child: IconButton(onPressed:(){
 
-                        Navigator.push(context, MaterialPageRoute(builder:(context)=>parkingmode()));
+                        Navigator.push(context, MaterialPageRoute(builder:(context)=>MyHomePage()));
                       }, icon:Icon(Icons.keyboard_double_arrow_right,size:80,color:Colors.white,),),
                     ),
                   ),

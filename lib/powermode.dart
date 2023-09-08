@@ -46,8 +46,11 @@ class _powermode extends State<powermode> {
   @override
   void initState() {
     super.initState();
-    _updateTime();
+
   }
+
+
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,7 +173,7 @@ class _powermode extends State<powermode> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: headLampr == '1'
+                        child: highbeam == '1'
                             ? Image.asset(
                                 'assets/images/high-beam_blue.png',
                                 fit: BoxFit.cover,
@@ -202,7 +205,7 @@ class _powermode extends State<powermode> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: malfunction == true
+                        child: headlamp == true
                             ? Image.asset(
                                 'assets/images/low-beam_green.png',
                                 fit: BoxFit.cover,
@@ -230,19 +233,18 @@ class _powermode extends State<powermode> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 50, top: 10),
+                      padding: const EdgeInsets.only(left: 50, top: 0),
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: parking_brake == true
-                            ? Image.asset(
-                                'assets/images/parkingBrakecolor.png',
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                'assets/images/parkingBrake.png',
-                                fit: BoxFit.cover,
-                              ),
+                        child: Text(
+                          "$gearr",
+                          style: GoogleFonts.roboto(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -255,19 +257,16 @@ class _powermode extends State<powermode> {
                     child: InkWell(
 
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyHomePage()));
+                        currentScreenIndex=1;
+                        // Navigator.of(context).pushReplacementNamed('/first');
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>MyHomePage()));
                       },
                       child: SizedBox(
                         height: 300,
                         child: IconButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MyHomePage()));
+                            currentScreenIndex=1;
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=>MyHomePage()));
                           },
                           icon: Icon(
                             Icons.keyboard_double_arrow_left,
@@ -541,7 +540,7 @@ class _powermode extends State<powermode> {
                                                   right: 160,
                                                 ),
                                                 child: Text(
-                                                  "DTE 100km",
+                                                  "DTE${fuelvalue*600}km",
                                                   style: TextStyle(
                                                       fontSize: 24,
                                                       fontWeight:
@@ -552,7 +551,7 @@ class _powermode extends State<powermode> {
                                               Container(
                                                 height: 50,
                                                 child: LinearProgressIndicator(
-                                                  value: 0.42,
+                                                  value: fuelvalue,
                                                   valueColor:
                                                       AlwaysStoppedAnimation(
                                                           Color(0xffFCD12A)),
@@ -570,7 +569,7 @@ class _powermode extends State<powermode> {
                                             decoration: const BoxDecoration(
                                               image: DecorationImage(
                                                 image: ExactAssetImage(
-                                                    'assets/images/battery_charge.png'),
+                                                    'assets/images/fuel-icon2.png'),
                                                 fit: BoxFit.fill,
                                               ),
                                             )),
@@ -578,9 +577,9 @@ class _powermode extends State<powermode> {
                                       Padding(
                                         padding: const EdgeInsets.only(top: 20),
                                         child: Text(
-                                          "50%",
+                                          "${fuelvalue*100}0%" ,
                                           style: TextStyle(
-                                              fontSize: 25,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87),
                                         ),
@@ -599,11 +598,8 @@ class _powermode extends State<powermode> {
                     padding: const EdgeInsets.only(left: 0.0),
                     child: InkWell(
                       onTap: () {
-                        currentScreenIndex=1;
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyHomePage()));
+                        currentScreenIndex=3;
+                        Navigator.push(context,MaterialPageRoute(builder: (context)=>regenmode()));
                       },
                       child: SizedBox(
                           height: 300,
@@ -613,10 +609,7 @@ class _powermode extends State<powermode> {
                               IconButton(
                                 onPressed: () {
                                   currentScreenIndex=3;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => regenmode()));
+                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>regenmode()));
                                 },
                                 icon: Icon(
                                   Icons.keyboard_double_arrow_right,
@@ -691,7 +684,7 @@ class _powermode extends State<powermode> {
                             ),
                           ),
                           Text(
-                            "Trip 293.8km",
+                            "Rpm $rpmr" ,
                             style: GoogleFonts.roboto(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -699,7 +692,7 @@ class _powermode extends State<powermode> {
                             ),
                           ),
                           Text(
-                            "TPMS",
+                            "Service $serviceDr",
                             style: GoogleFonts.roboto(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
