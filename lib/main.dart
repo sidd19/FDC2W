@@ -165,11 +165,67 @@ class _MyHomePageState extends State<MyHomePage> {
 
               
 
-          List<String> lines = rawdata.toString().split('\n');
+          String line = rawdata.toString();
 
            List<String> values = [];
            List<String> svalues = [];
-           for (String line in lines) {
+
+          if (line.isNotEmpty && line.startsWith('*E') && line.endsWith('K#')) {
+            rpmD = line.substring(2, 7);
+            // print('rpm is $rpmD');
+            speedD = line.substring(8, 11);
+
+            // print('speed is $speedD');
+            fuelLevelD = line.substring(12, 13);
+            //print('fuel level is $fuelLevelD');
+
+            odometerD = line.substring(14, 20);
+            //print('odo meter rating is $odometerD');
+            headLampD = line.substring(21, 22);
+            // print('headlamp status is $headLampD');
+            gearD = line.substring(23, 24)??"N";
+            // print('gear status is $gearD');
+            leftIndicatorD = line.substring(25, 26);
+            // print('left indicator status is $leftIndicatorD');
+            rightIndicatorD = line.substring(27, 28);
+            //print('right indicator status is $rightIndicatorD');
+            modeD = line.substring(29, 30);
+            // print('mode status is $rightIndicatorD');
+            serviceD = line.substring(31, 32);
+            // print('serviceD status is $serviceD');
+            batteryD = line.substring(32, 34);
+            // print('batteryD status is $batteryD');
+            assistD = line.substring(34, 35);
+            // print('assistD status is $assistD');
+            KeyIPD = line.substring(35, 36);
+            // print('keyIPD status is $KeyIPD');
+            //  highbeamD=line.substring(37,38);
+            //
+            //  //additional frame
+            // // print('highbeam status is $highbeamD');
+            //  sidestandD=line.substring(39,40);
+            //  hazardD= line.substring(41,42);
+            //  parkingD=line.substring(43,44);
+
+
+
+
+
+
+
+
+
+
+          } else {
+            if (line.isNotEmpty) {
+              print('data frame is incorrect');
+              line =line;
+            } else {
+              line = line;
+            }
+
+          }
+
     //    await Future.delayed(const Duration(milliseconds: 1));
         setState(() {
 
@@ -216,44 +272,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
-        String? value = line;
-
-        if (line.isNotEmpty && line.startsWith('*E') && line.endsWith('K#')) {
-          rpmD = line.substring(2, 7);
-         // print('rpm is $rpmD');
-          speedD = line.substring(8, 11);
-
-         // print('speed is $speedD');
-          fuelLevelD = line.substring(12, 13);
-          //print('fuel level is $fuelLevelD');
-
-          odometerD = line.substring(14, 20);
-          //print('odo meter rating is $odometerD');
-          headLampD = line.substring(21, 22);
-         // print('headlamp status is $headLampD');
-          gearD = line.substring(23, 24)??"N";
-         // print('gear status is $gearD');
-          leftIndicatorD = line.substring(25, 26);
-         // print('left indicator status is $leftIndicatorD');
-          rightIndicatorD = line.substring(27, 28);
-          //print('right indicator status is $rightIndicatorD');
-          modeD = line.substring(29, 30);
-         // print('mode status is $rightIndicatorD');
-          serviceD = line.substring(31, 32);
-         // print('serviceD status is $serviceD');
-          batteryD = line.substring(32, 34);
-         // print('batteryD status is $batteryD');
-          assistD = line.substring(34, 35);
-         // print('assistD status is $assistD');
-          KeyIPD = line.substring(35, 36);
-         // print('keyIPD status is $KeyIPD');
-         //  highbeamD=line.substring(37,38);
-         //
-         //  //additional frame
-         // // print('highbeam status is $highbeamD');
-         //  sidestandD=line.substring(39,40);
-         //  hazardD= line.substring(41,42);
-         //  parkingD=line.substring(43,44);
 
 
 
@@ -263,23 +281,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
-
-        } else {
-          if (line.isNotEmpty) {
-            print('data frame is incorrect');
-            line = lines.last;
-          } else {
-            line = lines.last;
-          }
-          String? svalue = value.toString();
-          if (value != null) {
-            values.add(value);
-            svalues.add(svalue);
-          }
-        }
 
         // });
-      }
+
     } catch (e) {
       print('Error loading gauge values: $e');
     }
@@ -559,41 +563,41 @@ class _MyHomePageState extends State<MyHomePage> {
                               axes: <RadialAxis>[
                                 RadialAxis(
                                     minimum: 0,
-                                    maximum: 140,
+                                    maximum: 360,
                                     isInversed: false,
                                     startAngle:
-                                        50, //240,//90  //for now 7/24/2023 50
+                                        90, //240,//90  //for now 7/24/2023 50
                                     endAngle:
-                                        -50, //240,//-90  //for now 7/24/2023 -50
+                                        450, //240,//-90  //for now 7/24/2023 -50
                                     interval: 10,
                                     showLabels: false,
                                     showTicks: false,
                                     ranges: <GaugeRange>[
                                       GaugeRange(
                                         startValue: 0,
-                                        endValue: 40,
-                                        color: Colors.orange,
-                                        startWidth: 5,
-                                        endWidth: 5,
-                                      ),
-                                      GaugeRange(
-                                        startValue: 40,
-                                        endValue: 70,
-                                        color: Colors.orange,
-                                        startWidth: 5,
-                                        endWidth: 5,
-                                      ),
-                                      GaugeRange(
-                                        startValue: 70,
-                                        endValue: 140,
-                                        color: Colors.orange,
+                                        endValue: 100,
+                                        color: Colors.green,
                                         startWidth: 5,
                                         endWidth: 5,
                                       ),
                                       GaugeRange(
                                         startValue: 100,
-                                        endValue: 120,
-                                        color: Colors.orange,
+                                        endValue: 200,
+                                        color: Colors.green,
+                                        startWidth: 5,
+                                        endWidth: 5,
+                                      ),
+                                      GaugeRange(
+                                        startValue: 200,
+                                        endValue: 240,
+                                        color: Colors.green,
+                                        startWidth: 5,
+                                        endWidth: 5,
+                                      ),
+                                      GaugeRange(
+                                        startValue: 240,
+                                        endValue: 360,
+                                        color: Colors.green,
                                         startWidth: 5,
                                         endWidth: 5,
                                       ),
@@ -605,17 +609,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
                                     pointers: <GaugePointer>[
                                       NeedlePointer(
-                                        value: value,
+                                        value: 360,
                                         enableAnimation: false,
                                         needleStartWidth: 0,
-                                        needleEndWidth: 0,
+                                        needleEndWidth: 5,
                                         needleColor: Color(0xFFDADADA),
                                         knobStyle: KnobStyle(
                                             color: Colors.white,
                                             borderColor:
                                                 Colors.white, //Color(0xFFDADADA
 
-                                            knobRadius: 0.00,
+                                            knobRadius: 0.05,
                                             borderWidth: 0.00),
                                         tailStyle: TailStyle(
                                             color: Color(0xFFDADADA),
@@ -624,13 +628,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                         animationType: AnimationType.ease,
                                       ),
                                       RangePointer(
-                                        value: double.tryParse(speedr)!>=140?140:double.tryParse(speedr)!,
+                                        value: double.tryParse(rpmr)!>=360?360:double.tryParse(rpmr)!,
                                         width: 35,
-                                        color: get_guage_color(),
+                                        color: Colors.green,
                                         pointerOffset: 5,
                                       ),
                                       MarkerPointer(
-                                        value: double.tryParse(speedr)!>=140?140:double.tryParse(speedr)!,
+                                        value: double.tryParse(rpmr)!>=360?360:double.tryParse(rpmr)!,
                                         markerOffset: 3,
                                         markerWidth: 5,
                                         markerHeight: 35,
@@ -642,7 +646,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     annotations: <GaugeAnnotation>[
                                       GaugeAnnotation(
                                         widget: Text(
-                                          "ECO",
+                                          "S.Ang",
                                           style: TextStyle(
                                               fontSize: 30,
                                               fontWeight: FontWeight.bold,
@@ -653,7 +657,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                       GaugeAnnotation(
                                         widget: Text(
-                                          double.tryParse(speedr)!>=140?speedr="140":speedr,
+                                          double.tryParse(rpmr)!>=360?rpmr="360":rpmr,
                                           style: TextStyle(
                                               fontSize: 60,
                                               fontWeight: FontWeight.bold,
@@ -664,11 +668,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                       GaugeAnnotation(
                                         widget: Text(
-                                          "kmph",
+                                          "Degree",
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black38),
+                                              color: Colors.orange),
                                         ),
                                         angle: 90,
                                         positionFactor: .4,
@@ -856,8 +860,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.only(left: 0.0),
                     child: InkWell(
                       onTap: () {
-                        currentScreenIndex=2;
-                        Navigator.of(context).pushReplacementNamed('/second');
+                        // currentScreenIndex=2;
+                        // Navigator.of(context).pushReplacementNamed('/second');
                       },
                       child: SizedBox(
                           height: 300,
@@ -866,9 +870,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  currentScreenIndex=2;
-                                  //Navigator.of(context).pushReplacementNamed('/second');
-                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
+                                  // currentScreenIndex=2;
+                                  // //Navigator.of(context).pushReplacementNamed('/second');
+                                  // Navigator.push(context,MaterialPageRoute(builder: (context)=>powermode()));
                                 },
                                 icon: Icon(
                                   Icons.keyboard_double_arrow_right,
