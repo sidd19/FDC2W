@@ -5,7 +5,7 @@ import 'package:flutter_homescreen/main.dart';
 import 'package:flutter_homescreen/variables_func.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_homescreen/general_settings.dart';
+//import 'package:flutter_homescreen/general_settings.dart';
 import 'package:flutter_homescreen/regenmode.dart';
 import 'package:flutter_homescreen/parkingmode.dart';
 //import 'package:flutter_homescreen/bluetooth.dart';
@@ -125,7 +125,7 @@ class _menubar  extends State<menubar >{
 
 
 
-                          Navigator.push(context,MaterialPageRoute(builder:(context)=>general_settings()));
+                          //Navigator.push(context,MaterialPageRoute(builder:(context)=>general_settings()));
 
 
                         },style:ElevatedButton.styleFrom(backgroundColor:button_pressed?Colors.black:Colors.black,side:BorderSide(color:Colors.white,width:2)), child:Row(

@@ -195,8 +195,8 @@ final thread = Thread((events) {
   events.on('data', (String data) async {
     while(true) {
       await Future.delayed(const Duration(milliseconds: 100));
-      httpdata = await http.read(Uri.http('127.0.0.1:2001', ''));
-
+      httpdata = await http.read(Uri.http('127.0.0.1:2001', ''));  //"*E12345 150 1 123456 1 0 1 1 1 0 0114k#";
+      print(httpdata);
       events.emit('realtime', '$httpdata');
     }
   });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_homescreen/main.dart';
 import 'dart:async';
-import 'package:flutter_homescreen/powermode.dart';
+
 
 class splash_screen extends StatefulWidget {
   @override
